@@ -1,4 +1,4 @@
-import {ANSWER, DISPLAY_UPDATED} from '../actions';
+import {NEXT_QUESTION, DISPLAY_UPDATED} from '../actions';
 import YAML from 'yamljs';
 
 const loadQuiz = () => {
@@ -24,25 +24,21 @@ function quiz(state = loadQuiz(), action)
   switch (action.type) {
     case DISPLAY_UPDATED:
       return Object.assign({}, state, {changed: false});
-    case ANSWER: {
-      if (!action.correct) {
-        return state;
-      }
-
-      const currentQuestion = state.current.question;
-      const currentRound = state.current.round;
+    case NEXT_QUESTION: {
       const newState = Object.assign({}, state);
-
-      if (currentQuestion >= state.questions[currentRound].total) {
-        newState.changed = true;
-        newState.current.round++;
-        newState.current.question = 0;
-
-        return newState;
-      }
 
       newState.changed = true;
       newState.current.question++;
+
+      if (newState.current.question > state.questions[state.current.round - 1].total) {
+        newState.current.round++;
+        newState.current.question = 0;
+      }
+
+      if (newState.current.round > state.totalRounds) {
+        newState.current.round = 1;
+        newState.current.question = 0;
+      }
 
       return newState;
     }

@@ -116,3 +116,8 @@ export function setQuestion(roundName, roundNumber, questionNumber, question)
 {
   return {type: actions.QUESTION, roundName, roundNumber, questionNumber, question}
 }
+
+export function nextQuestion()
+{
+  return {type: actions.NEXT_QUESTION}
+}

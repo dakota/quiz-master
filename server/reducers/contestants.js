@@ -1,9 +1,10 @@
-import {connection, BUZZ, REMOVE_CONTESTANT, CHANGE_CONTESTANT_FIELD, CLEAR_BUZZER, ANSWER} from '../actions';
+import {connection, BUZZ, REMOVE_CONTESTANT, CHANGE_CONTESTANT_FIELD, CLEAR_BUZZER, ANSWER, NEXT_QUESTION} from '../actions';
 import {CLASS_CONTESTANT, buzzer, COLORS} from '../../src/constants';
 
 const initialState = {
   buzzed: false,
   buzzee: null,
+  correct: null,
   incorrects: [],
   contestants: {}
 }
@@ -116,17 +117,32 @@ function contestants(state = initialState, action)
       if (action.correct) {
         newState.incorrects = [];
         newState.contestants[buzzee].score += 1;
-      } else {
-        newState.incorrects.push(buzzee);
+        newState.correct = buzzee;
+
+        for (let _id in newState.contestants) {
+          freezeBuzzer(newState, _id);
+        }
+
+        return newState;
       }
 
+      newState.incorrects.push(buzzee);
       newState.buzzed = false;
       newState.buzzee = null;
       for (let _id in newState.contestants) {
-        if (!action.correct && _id === buzzee || newState.incorrects.indexOf(_id) !== -1) {
+        if (_id === buzzee || newState.incorrects.indexOf(_id) !== -1) {
           freezeBuzzer(newState, _id);
           continue;
         }
+        resetBuzzer(newState, _id);
+      }
+
+      return newState;
+    case NEXT_QUESTION:
+      newState.correct = null;
+      newState.buzzed = false;
+      newState.buzzee = null;
+      for (let _id in newState.contestants) {
         resetBuzzer(newState, _id);
       }
 

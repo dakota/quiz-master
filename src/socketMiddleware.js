@@ -147,13 +147,20 @@ const socketMiddleware = (function ()
 
         break;
       case actions.ANSWER:
-        console.log(action);
         socket.send(JSON.stringify({
           msg: msg.ANSWER,
           correct: action.correct
         }));
 
         break;
+
+      case actions.NEXT_QUESTION:
+        socket.send(JSON.stringify({
+          msg: msg.NEXT_QUESTION
+        }));
+
+        break;
+
       //This action is irrelevant to us, pass it on to the next middleware
       default:
         return next(action);

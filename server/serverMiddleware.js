@@ -15,7 +15,9 @@ import {
   answer,
   CLEAR_BUZZER,
   ANSWER,
-  DISPLAY_UPDATED
+  DISPLAY_UPDATED,
+  nextQuestion,
+  NEXT_QUESTION
 } from './actions';
 import {
   msg,
@@ -66,6 +68,13 @@ const serverMiddleware = (function ()
         }
 
         store.dispatch(answer(command.correct));
+        break;
+      case msg.NEXT_QUESTION:
+        if (_id !== store.getState().host) {
+          return;
+        }
+
+        store.dispatch(nextQuestion());
         break;
     }
   }
@@ -148,9 +157,9 @@ const serverMiddleware = (function ()
     if (forceQuestion === true || state.quiz.changed) {
       sendMessage(connection, msg.QUESTION, {
         roundNumber: state.quiz.current.round,
-        name: state.quiz.questions[state.quiz.current.round].name,
+        name: state.quiz.questions[state.quiz.current.round - 1].name,
         questionNumber: state.quiz.current.question,
-        question: state.quiz.current.question === 0 ? null : state.quiz.questions[state.quiz.current.round].questions[state.quiz.current.question]
+        question: state.quiz.current.question === 0 ? null : state.quiz.questions[state.quiz.current.round - 1].questions[state.quiz.current.question - 1]
       }, _id);
     }
   }
@@ -230,6 +239,7 @@ const serverMiddleware = (function ()
       case REMOVE_CONTESTANT:
       case CLEAR_BUZZER:
       case ANSWER:
+      case NEXT_QUESTION:
         result = next(action);
 
         state = store.getState();

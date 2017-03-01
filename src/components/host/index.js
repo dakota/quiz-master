@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {configure, clearBuzzers, correctAnswer, incorrectAnswer} from '../../actions';
+import {configure, clearBuzzers, correctAnswer, incorrectAnswer, nextQuestion} from '../../actions';
 import { CLASS_HOST } from '../../constants';
 import Contestants from '../display/Contestants';
 import {Button} from 'react-mdl';
@@ -33,7 +33,10 @@ class Host extends Component {
           }}>Clear buzzer</Button>
         </div>
         <div style={{marginTop: '30px'}}>
-          <Button raised ripple onClick={this.nextQuestion}>Next question</Button>
+          <Button raised ripple onClick={() =>
+          {
+            this.props.dispatch(nextQuestion());
+          }}>Next question</Button>
         </div>
       </div>
     );

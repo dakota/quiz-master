@@ -14,6 +14,7 @@ export const CHANGE_CONTESTANT_FIELD = 'ACTION_CHANGE_CONTESTANT_FIELD';
 export const CLEAR_BUZZER = 'ACTION_CLEAR_BUZZER';
 export const ANSWER = 'ACTION_ANSWER';
 export const DISPLAY_UPDATED = 'ACTION_DISPLAY_UPDATED';
+export const NEXT_QUESTION = 'ACTION_NEXT_QUESTION';
 
 export function connectionHandshake(webSocketConnection, handshake) {
   return {type: connection.HANDSHAKE, handshake, connection: webSocketConnection}
@@ -47,4 +48,9 @@ export function clearBuzzer()
 export function answer(correct)
 {
     return {type: ANSWER, correct}
+}
+
+export function nextQuestion()
+{
+  return {type: NEXT_QUESTION};
 }
