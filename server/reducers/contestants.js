@@ -70,6 +70,7 @@ function contestants(state = initialState, action)
         return newState;
       }
 
+      newState.correct = null;
       newState.buzzed = false;
       newState.buzzee = null;
       for (let _id in newState.contestants) {
@@ -127,6 +128,7 @@ function contestants(state = initialState, action)
       }
 
       newState.incorrects.push(buzzee);
+      newState.correct = false;
       newState.buzzed = false;
       newState.buzzee = null;
       for (let _id in newState.contestants) {

@@ -4,6 +4,7 @@ import Contestant from './Contestant';
 class Contestants extends Component {
   render()
   {
+    console.log(this.props);
     const contestants = Object.entries(this.props.contestants);
     const width = (100 / contestants.length) - 1;
     return (
@@ -18,6 +19,8 @@ class Contestants extends Component {
           }} />
         })}
         </div>
+        {this.props.buzzed && this.props.correct && <h1>Correct!</h1>}
+        {this.props.buzzed === false && this.props.correct === false && <h1>Incorrect!</h1>}
       </div>
     )
   }

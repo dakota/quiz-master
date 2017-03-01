@@ -82,9 +82,9 @@ export function configured()
   return {type: actions.CONFIGURED}
 }
 
-export function updateContestants(contestants, buzzed)
+export function updateContestants(contestants, buzzed, correct)
 {
-  return {type: actions.UPDATE_CONTESTANTS, contestants, buzzed}
+  return {type: actions.UPDATE_CONTESTANTS, contestants, buzzed, correct}
 }
 
 export function updateContestant(_id, contestant, store = true)

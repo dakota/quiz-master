@@ -151,7 +151,8 @@ const serverMiddleware = (function ()
     const connection = state.connections[_id];
     sendMessage(connection, msg.UPDATE_CONTESTANTS, {
       contestants: state.contestants.contestants,
-      buzzed: state.contestants.buzzed
+      buzzed: state.contestants.buzzed,
+      correct: state.contestants.correct
     }, _id);
 
     if (forceQuestion === true || state.quiz.changed) {

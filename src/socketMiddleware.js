@@ -66,7 +66,7 @@ const socketMiddleware = (function ()
         if (state.class === CLASS_CONTESTANT) {
           break;
         }
-        store.dispatch(updateContestants(command.contestants, command.buzzed));
+        store.dispatch(updateContestants(command.contestants, command.buzzed, command.correct));
         break;
       case msg.UPDATE_CONTESTANT:
         if (state.class !== CLASS_CONTESTANT) {
