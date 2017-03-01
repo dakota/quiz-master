@@ -1,0 +1,43 @@
+---
+  - name: Scouting Trivia
+    questions:
+      - question: Who was speaking?
+        media: bp-speaking.mp3
+        correct: Lord Baden-Powell
+      - question: What was he speaking about?
+        correct: The Scout Promise
+      - question: What year was scouting founded?
+        choices: [1907, 2002, 1950, 1821]
+        correct: 1907
+      - question: Where was the first Scout camp held?
+        answers: [Brownsea Island, Bluesea Yacht Club, Mafikeng, Gilwell]
+        correct: Brownsea Island
+      - question: When was the first World Jamboree held?
+        answers: [1920, 1985, 1908, 1921]
+        correct: 1920
+  - name: Local Scouting
+    questions:
+      - question: What district are we in?
+        correct: Tshwane South
+      - question: Who is our district commissioner?
+        answers: [Neil Marshall, Neil Patrick Harris, Michael Griffin, Deagle]
+        correct: Neil Marshall
+      - question: Give the full names of five Scouters
+        correct: Dakota, Puma, Vampire, Super Chief, Double Eagle, Hurricane, Hawk
+      - question: Approximately when was 9th Irene founded?
+        answers: [1921, 1980, 2001, 1901]
+        correct: 1921
+      - question: What is the tower called?
+        correct: John Trollop Tower
+      - question: When was the Scout Hall opened?
+        answers: [1956, 1985, 1921, 2005]
+        correct: 1956
+  - name: General Knowledge
+    questions:
+      - question: Which planet is the only one that spins clockwise on its axis?
+        answers: [Jupiter, Earth, Venus, Uranus]
+        correct: Venus
+      - question: Which country's flag is this?
+        media: mongolia-flag.jpg
+        answers: [Guam, USA, Bhutan, Suriname, Mongolia]
+        correct: Mongolia

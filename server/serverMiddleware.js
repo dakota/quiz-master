@@ -14,10 +14,12 @@ import {
   clearBuzzer,
   answer,
   CLEAR_BUZZER,
-  ANSWER
+  ANSWER,
+  DISPLAY_UPDATED
 } from './actions';
 import {
   msg,
+  CLASS_CONTESTANT
 } from '../src/constants';
 
 const serverMiddleware = (function ()
@@ -135,24 +137,38 @@ const serverMiddleware = (function ()
     return true;
   }
 
+  const updateDisplay = (state, _id, forceQuestion = false) =>
+  {
+    const connection = state.connections[_id];
+    sendMessage(connection, msg.UPDATE_CONTESTANTS, {
+      contestants: state.contestants.contestants,
+      buzzed: state.contestants.buzzed
+    }, _id);
+
+    if (forceQuestion === true || state.quiz.changed) {
+      sendMessage(connection, msg.QUESTION, {
+        roundNumber: state.quiz.current.round,
+        name: state.quiz.questions[state.quiz.current.round].name,
+        questionNumber: state.quiz.current.question,
+        question: state.quiz.current.question === 0 ? null : state.quiz.questions[state.quiz.current.round].questions[state.quiz.current.question]
+      }, _id);
+    }
+  }
+
   const updateDisplays = store =>
   {
     const state = store.getState();
 
     state.displays.forEach((_id) =>
     {
-      sendMessage(state.connections[_id], msg.UPDATE_CONTESTANTS, {
-        contestants: state.contestants.contestants,
-        buzzed: state.contestants.buzzed
-      }, _id);
+      updateDisplay(state, _id);
     });
 
     if (state.host) {
-      sendMessage(state.connections[state.host], msg.UPDATE_CONTESTANTS, {
-        contestants: state.contestants.contestants,
-        buzzed: state.contestants.buzzed
-      }, state.host);
+      updateDisplay(state, state.host);
     }
+
+    store.dispatch({type: DISPLAY_UPDATED});
   }
 
   return store => next => action =>
@@ -245,17 +261,17 @@ const serverMiddleware = (function ()
         state = store.getState();
         const _id = action.handshake._id;
 
-        if (!state.contestants.contestants[_id]) {
-          updateDisplays(store);
+        if (action.handshake.class === CLASS_CONTESTANT) {
+          sendMessage(action.connection, msg.UPDATE_CONTESTANT, {
+            contestant: state.contestants.contestants[_id]
+          }, _id);
 
-          return result;
+          updateDisplays(store);
         }
 
-        sendMessage(action.connection, msg.UPDATE_CONTESTANT, {
-          contestant: state.contestants.contestants[_id]
-        }, _id);
-
-        updateDisplays(store);
+        if (action.handshake.class !== CLASS_CONTESTANT) {
+          updateDisplay(state, _id, true);
+        }
 
         return result;
 

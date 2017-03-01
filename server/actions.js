@@ -13,6 +13,7 @@ export const REMOVE_CONTESTANT = 'ACTION_REMOVE_CONTESTANT';
 export const CHANGE_CONTESTANT_FIELD = 'ACTION_CHANGE_CONTESTANT_FIELD';
 export const CLEAR_BUZZER = 'ACTION_CLEAR_BUZZER';
 export const ANSWER = 'ACTION_ANSWER';
+export const DISPLAY_UPDATED = 'ACTION_DISPLAY_UPDATED';
 
 export function connectionHandshake(webSocketConnection, handshake) {
   return {type: connection.HANDSHAKE, handshake, connection: webSocketConnection}
