@@ -4,7 +4,8 @@ import {
   connecting,
   retryConnection,
   updateContestants,
-  updateContestant
+  updateContestant,
+  setQuestion
 } from './actions';
 import {
   msg,
@@ -73,6 +74,11 @@ const socketMiddleware = (function ()
         }
         store.dispatch(updateContestant(command._id, command.contestant, false));
         break;
+      case msg.QUESTION: {
+        store.dispatch(setQuestion(command.name, command.roundNumber, command.questionNumber, command.question));
+        console.log(command);
+        break;
+      }
       default:
         console.log("Received unknown message type: '" + command.msg + "'");
         break;

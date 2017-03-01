@@ -4,6 +4,7 @@ import {configure, clearBuzzers, correctAnswer, incorrectAnswer} from '../../act
 import { CLASS_HOST } from '../../constants';
 import Contestants from '../display/Contestants';
 import {Button} from 'react-mdl';
+import Question from './Question';
 
 class Host extends Component {
   componentWillMount() {
@@ -14,6 +15,7 @@ class Host extends Component {
     return (
       <div>
         <h3>Quiz Master 3000 Host</h3>
+        <Question />
         <Contestants adminMode />
         <div style={{marginTop: '30px'}}>
           <Button disabled={!this.props.buzzed} colored raised ripple onClick={() => {
@@ -40,7 +42,8 @@ class Host extends Component {
 
 Host = connect((store) => {
   return {
-    buzzed: store.contestants.buzzed
+    buzzed: store.contestants.buzzed,
+    question: store.question
   }
 })(Host);
 
