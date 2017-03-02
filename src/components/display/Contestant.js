@@ -57,7 +57,7 @@ class Contestants extends Component {
     }
 
     return (
-      <Card shadow={1} className={colorClass + ' contestant'} style={{width: this.props.width + '%', height: '200px', margin: 'auto'}}>
+      <Card shadow={1} className={colorClass + ' contestant'}>
         <CardTitle expand style={{alignItems: 'flex-start', color: '#fff', textAlign: 'center'}}>
           <h3 style={{textAlign: 'center', width: '100%'}}>{contestant.name}</h3>
         </CardTitle>

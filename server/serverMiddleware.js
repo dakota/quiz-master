@@ -157,10 +157,11 @@ const serverMiddleware = (function ()
 
     if (forceQuestion === true || state.quiz.changed) {
       sendMessage(connection, msg.QUESTION, {
+        end: state.quiz.end,
         roundNumber: state.quiz.current.round,
-        name: state.quiz.current.round !== 0 ? state.quiz.questions[state.quiz.current.round - 1].name : '',
+        name: !state.quiz.end && state.quiz.current.round !== 0 ? state.quiz.questions[state.quiz.current.round - 1].name : '',
         questionNumber: state.quiz.current.question,
-        question: state.quiz.current.round === 0 || state.quiz.current.question === 0 ? null : state.quiz.questions[state.quiz.current.round - 1].questions[state.quiz.current.question - 1]
+        question: state.quiz.end || state.quiz.current.round === 0 || state.quiz.current.question === 0 ? null : state.quiz.questions[state.quiz.current.round - 1].questions[state.quiz.current.question - 1]
       }, _id);
     }
   }
@@ -184,7 +185,7 @@ const serverMiddleware = (function ()
   const updateContestant = (state, _id) => {
     sendMessage(state.connections[_id], msg.UPDATE_CONTESTANT, {
       contestant: state.contestants.contestants[_id],
-      active: state.quiz.current.round !== 0 && state.quiz.current.question !== 0,
+      active: state.quiz.end === false && state.quiz.current.round !== 0 && state.quiz.current.question !== 0,
     }, _id);
   }
 

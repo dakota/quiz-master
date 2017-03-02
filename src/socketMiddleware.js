@@ -75,8 +75,7 @@ const socketMiddleware = (function ()
         store.dispatch(updateContestant(command._id, command.contestant, command.active, false));
         break;
       case msg.QUESTION: {
-        store.dispatch(setQuestion(command.name, command.roundNumber, command.questionNumber, command.question));
-        console.log(command);
+        store.dispatch(setQuestion(command.name, command.roundNumber, command.questionNumber, command.question, command.end));
         break;
       }
       default:

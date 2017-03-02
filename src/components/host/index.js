@@ -23,26 +23,28 @@ class Host extends Component {
           }}>Start the quiz</Button>
         </div>
       );
-    } else {
+    } else if (!this.props.end) {
       buttons = (
       <div>
-        <div style={{marginTop: '30px'}}>
-          <Button disabled={!this.props.buzzed} colored raised ripple onClick={() =>
-          {
-            this.props.dispatch(correctAnswer());
-          }}>Correct!</Button>
-          <Button disabled={!this.props.buzzed} accent raised ripple onClick={() =>
-          {
-            this.props.dispatch(incorrectAnswer());
-          }}>Incorrect</Button>
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <div style={{marginTop: '30px'}}>
+            <Button disabled={!this.props.buzzed} colored raised ripple onClick={() =>
+            {
+              this.props.dispatch(correctAnswer());
+            }}>Correct!</Button>
+            <Button disabled={!this.props.buzzed} accent raised ripple onClick={() =>
+            {
+              this.props.dispatch(incorrectAnswer());
+            }}>Incorrect</Button>
+          </div>
+          <div style={{marginTop: '30px'}}>
+            <Button raised ripple onClick={() =>
+            {
+              this.props.dispatch(nextQuestion());
+            }}>{this.props.questionNumber === 0 ? 'Start round' : 'Next question'}</Button>
+          </div>
         </div>
-        <div style={{marginTop: '30px'}}>
-          <Button raised ripple onClick={() =>
-          {
-            this.props.dispatch(nextQuestion());
-          }}>{this.props.questionNumber === 0 ? 'Start round' : 'Next question'}</Button>
-        </div>
-        <div style={{marginTop: '30px'}}>
+        <div style={{position: 'absolute', bottom: '10px'}}>
           <Button raised ripple onClick={() =>
           {
             this.props.dispatch(clearBuzzers());
@@ -50,6 +52,13 @@ class Host extends Component {
         </div>
       </div>
       );
+    } else {
+      <div style={{marginTop: '30px'}}>
+        <Button raised ripple onClick={() =>
+        {
+          this.props.dispatch(nextQuestion());
+        }}>Restart the quiz</Button>
+      </div>
     }
 
     return (
@@ -65,6 +74,7 @@ class Host extends Component {
 
 Host = connect((store) => {
   return {
+    end: store.question.end,
     buzzed: store.contestants.buzzed,
     correct: store.contestants.correct,
     roundNumber: store.question.roundNumber,

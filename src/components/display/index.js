@@ -13,13 +13,23 @@ class Display extends Component {
 
   render()
   {
+    let header;
+    let winner;
+    if(this.props.roundNumber && !this.props.end) {
+      header = (<h2>
+        Quiz Master 3000 - Round {this.props.roundNumber}
+        {this.props.questionNumber !== 0 && <small>Question {this.props.questionNumber}</small>}
+      </h2>);
+    } else {
+      header = (<h2>
+        Quiz Master 3000
+      </h2>);
+    }
+
     return (
       <div>
         <header>
-          <h2>
-            Quiz Master 3000 - Round {this.props.roundNumber}
-            {this.props.questionNumber !== 0 && <small>Question {this.props.questionNumber}</small>}
-          </h2>
+          {header}
         </header>
         <Question />
         <Contestants />
@@ -31,6 +41,7 @@ class Display extends Component {
 Display = connect(
   (state) => {
     return {
+      end: state.question.end,
       roundNumber: state.question.roundNumber,
       roundName: state.question.roundName,
       questionNumber: state.question.questionNumber,

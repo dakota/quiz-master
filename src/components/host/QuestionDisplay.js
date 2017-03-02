@@ -12,7 +12,7 @@ class QuestionDisplay extends Component {
       question = (
         <div>
           <p><strong>{this.props.question.question}</strong></p>
-          <p>{this.props.question.correct}</p>
+          <p>{this.props.question.answer}</p>
         </div>
       );
     }

@@ -2,27 +2,6 @@ import React, {Component} from 'react';
 import {List, ListItem} from 'react-mdl';
 
 class QuestionDisplay extends Component {
-  shuffle(array)
-  {
-    let currentIndex = array.length;
-    let temporaryValue;
-    let randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-  }
 
   render()
   {
@@ -30,24 +9,35 @@ class QuestionDisplay extends Component {
       return (<span></span>);
     }
 
-    let answers;
-    let answersElement;
+    let choices;
+    let choicesElement;
 
-    if (this.props.question.answers) {
-      answers = this.shuffle(this.props.question.answers);
-      answersElement = (
+    if (this.props.question.choices) {
+      choices = this.props.question.choices;
+      choicesElement = (
         <List>
-          {answers.map((answer) => {
-            return (<ListItem style={{display: 'inline-block'}}><h4>{answer}</h4></ListItem>)
+          {choices.map((choice) => {
+            if (this.props.correct && choice === this.props.question.answer) {
+              choice = (<h3><strong>{choice}</strong></h3>);
+            } else {
+              choice = (<h4>{choice}</h4>)
+            }
+            return (<ListItem style={{display: 'inline-block'}}>
+              {choice}
+            </ListItem>)
           })}
         </List>
       );
+    } else if (this.props.correct) {
+      choicesElement = (
+        <h3><strong>{this.props.question.answer}</strong></h3>
+      )
     }
 
     return (
       <div>
         <h3><strong>{this.props.question.question}</strong></h3>
-        {answersElement}
+        {choicesElement}
       </div>
     );
   }

@@ -112,9 +112,9 @@ export function incorrectAnswer()
   return {type: actions.ANSWER, correct: false}
 }
 
-export function setQuestion(roundName, roundNumber, questionNumber, question)
+export function setQuestion(roundName, roundNumber, questionNumber, question, end)
 {
-  return {type: actions.QUESTION, roundName, roundNumber, questionNumber, question}
+  return {type: actions.QUESTION, roundName, roundNumber, questionNumber, question, end}
 }
 
 export function nextQuestion()
