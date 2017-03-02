@@ -1,34 +1,65 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {
   Card,
   CardTitle,
   CardActions,
 } from 'react-mdl';
-import {buzzer} from '../../constants';
 import Menu from './Menu';
+import {buzzer} from '../../constants';
 
 class Contestants extends Component {
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      flashState: false
+    }
+  }
+
+  triggerBuzzerFlash()
+  {
+    setTimeout(() =>
+    {
+      this.setState({flashState: !this.state.flashState});
+    }, this.state.flashState ? 1000 : 250);
+  }
+
+  componentWillMount()
+  {
+    if (this.props.contestant.buzzer === buzzer.BUZZED) {
+      this.triggerBuzzerFlash();
+    }
+  }
+
+  componentWillUpdate(props)
+  {
+    if (props.contestant.buzzer === buzzer.BUZZED) {
+      this.triggerBuzzerFlash()
+    } else if (this.state.flashState === true) {
+      this.setState({flashState: false});
+    }
+  }
+
   render()
   {
     const contestant = this.props.contestant;
     const stateMap = {
-      READY: '500',
-      BUZZED: '900',
-      FROZEN: '200',
-      disconnected: '50'
+      READY: 500,
+      BUZZED: 100,
+      FROZEN: 100,
     }
     let colorClass = 'mdl-color--' + this.props.contestant.color + '-';
 
-    if (contestant.connected === false) {
-      colorClass += stateMap.disconnected;
+    if (this.props.correct === true) {
+      colorClass += '900';
     } else {
-      colorClass += stateMap[contestant.buzzer];
+      colorClass += (this.props.contestant.buzzer === buzzer.BUZZED && !this.state.flashState ? 800 : stateMap[contestant.buzzer]);
     }
 
     return (
-      <Card shadow={1} className={colorClass} style={{width: this.props.width + '%', height: '200px', margin: 'auto'}}>
+      <Card shadow={1} className={colorClass + ' contestant'} style={{width: this.props.width + '%', height: '200px', margin: 'auto'}}>
         <CardTitle expand style={{alignItems: 'flex-start', color: '#fff', textAlign: 'center'}}>
-          <h4>{contestant.name}</h4>
+          <h3 style={{textAlign: 'center', width: '100%'}}>{contestant.name}</h3>
         </CardTitle>
         <CardActions border style={{
           borderColor: 'rgba(255, 255, 255, 0.2)',
@@ -37,7 +68,6 @@ class Contestants extends Component {
           alignItems: 'center',
           color: '#fff'
         }}>
-          {contestant.buzzer === buzzer.BUZZED && contestant.connected && <h5>BUZZED</h5>}
           <div className="mdl-layout-spacer"></div>
           <h2>{contestant.score}</h2>
         </CardActions>
@@ -46,5 +76,13 @@ class Contestants extends Component {
     )
   }
 }
+
+Contestants.propTypes = {
+  correct: PropTypes.bool
+};
+
+Contestants.defaultProps = {
+  correct: false
+};
 
 export default Contestants;

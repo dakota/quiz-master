@@ -3,3 +3,18 @@
   top: 10px;
   right: 10px;
 }
+
+.contestants {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+}
+
+.contestant {
+  transition: .25s all ease-in-out;
+}
+
+header {
+  text-align: center;
+}

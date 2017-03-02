@@ -29,15 +29,16 @@ class Host extends Component {
         <div style={{marginTop: '30px'}}>
           <Button raised ripple onClick={() =>
           {
-            this.props.dispatch(clearBuzzers());
-          }}>Clear buzzer</Button>
+            this.props.dispatch(nextQuestion());
+          }}>Next question</Button>
         </div>
         <div style={{marginTop: '30px'}}>
           <Button raised ripple onClick={() =>
           {
-            this.props.dispatch(nextQuestion());
-          }}>Next question</Button>
+            this.props.dispatch(clearBuzzers());
+          }}>Clear buzzer</Button>
         </div>
+
       </div>
     );
   }
@@ -46,7 +47,8 @@ class Host extends Component {
 Host = connect((store) => {
   return {
     buzzed: store.contestants.buzzed,
-    question: store.question
+    question: store.question,
+    correct: store.contestants.correct
   }
 })(Host);
 
