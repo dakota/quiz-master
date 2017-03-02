@@ -21,8 +21,9 @@ class Contestants extends Component {
 
     return (
       <div className={this.props.adminMode ? 'admin-contestants': 'contestants'}>
-        {!this.props.adminMode && this.props.correct !== 0 && this.props.correct !== -1 && <h1>Correct!</h1>}
+        {!this.props.adminMode && !(this.props.correct <= 0) && <h1>Correct!</h1>}
         {!this.props.adminMode && this.props.correct === -1 && <h1>Incorrect!</h1>}
+        {!this.props.adminMode && this.props.correct === -2 && <h1>Nobody got it right!</h1>}
         {this.props.end && winner !== '' && <h1>Congratulations to {winner}!</h1>}
         <div className='contestant-container'>
         {contestants.map((contestant) => {

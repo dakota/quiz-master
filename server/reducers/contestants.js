@@ -31,6 +31,17 @@ function resetBuzzer(newState, id)
   newState.contestants[id].buzzer = buzzer.READY;
 }
 
+function connectedCount(newState)
+{
+  const contestants = Object.entries(newState.contestants);
+  let count = 0;
+  for (let contestant of contestants) {
+    count += contestant[1].connected === true ? 1 : 0;
+  }
+
+  return count;
+}
+
 function contestants(state = initialState, action)
 {
   const newState = Object.assign({}, state);
@@ -68,6 +79,8 @@ function contestants(state = initialState, action)
       return newState;
     case REMOVE_CONTESTANT:
       delete newState.contestants[action._id];
+
+
 
       return newState;
     case BUZZ:
@@ -128,6 +141,10 @@ function contestants(state = initialState, action)
           continue;
         }
         resetBuzzer(newState, _id);
+      }
+
+      if (newState.incorrects.length >= connectedCount(state)) {
+        newState.correct = -2;
       }
 
       return newState;

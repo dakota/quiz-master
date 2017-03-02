@@ -38,7 +38,7 @@ class Host extends Component {
             }}>Incorrect</Button>
           </div>
           <div style={{marginTop: '30px'}}>
-            <Button raised ripple onClick={() =>
+            <Button raised ripple disabled={this.props.questionNumber !== 0 && (this.props.correct === 0 || this.props.correct === -1)} onClick={() =>
             {
               this.props.dispatch(nextQuestion());
             }}>{this.props.questionNumber === 0 ? 'Start round' : 'Next question'}</Button>
