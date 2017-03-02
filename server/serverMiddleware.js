@@ -213,7 +213,7 @@ const serverMiddleware = (function ()
           response.end();
         });
 
-        httpServer.listen(8080, () =>
+        httpServer.listen(8080, '0.0.0.0', () =>
         {
           console.log((
               new Date()

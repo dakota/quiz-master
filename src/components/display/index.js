@@ -14,7 +14,6 @@ class Display extends Component {
   render()
   {
     let header;
-    let winner;
     if(this.props.roundNumber && !this.props.end) {
       header = (<h2>
         Quiz Master 3000 - Round {this.props.roundNumber}

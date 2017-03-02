@@ -53,12 +53,12 @@ class Host extends Component {
       </div>
       );
     } else {
-      <div style={{marginTop: '30px'}}>
+      buttons = (<div style={{marginTop: '30px'}}>
         <Button raised ripple onClick={() =>
         {
           this.props.dispatch(nextQuestion());
         }}>Restart the quiz</Button>
-      </div>
+      </div>)
     }
 
     return (

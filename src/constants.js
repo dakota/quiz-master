@@ -33,7 +33,7 @@ export const CONNECTING = 'CONNECTING';
 export const CONNECTED = 'CONNECTED';
 
 export const websocket = {
-  URL: 'ws://localhost:8080',
+  URL: 'ws://192.168.5.219:8080',
   PROTOCOL: 'quiz-master'
 };
 

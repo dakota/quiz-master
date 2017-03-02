@@ -2,7 +2,9 @@
   - name: Scouting Trivia
     questions:
       - question: Who was speaking?
-        media: bp-speaking.mp3
+        media:
+        - type: audio
+        - file: bp-speaking.mp3
         answer: Lord Baden-Powell
       - question: What was he speaking about?
         answer: The Scout Promise

@@ -7,7 +7,6 @@ import BuzzerButton from './BuzzerButton';
 import Configuration from './Configuration';
 import {configure} from '../../actions';
 import store from '../../store';
-import {CLASS_NONE} from '../../constants';
 
 class Contestant extends Component {
   constructor(props)
