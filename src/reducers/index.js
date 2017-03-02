@@ -6,6 +6,7 @@ import classReducer from './class';
 import configured from './configured';
 import id from './id';
 import question from './question';
+import active from './active';
 
 const quizMasterApp = combineReducers({
   connection,
@@ -14,7 +15,8 @@ const quizMasterApp = combineReducers({
   class: classReducer,
   id,
   configured,
-  question
+  question,
+  active
 });
 
 export default quizMasterApp;

@@ -184,8 +184,7 @@ const serverMiddleware = (function ()
   const updateContestant = (state, _id) => {
     sendMessage(state.connections[_id], msg.UPDATE_CONTESTANT, {
       contestant: state.contestants.contestants[_id],
-      activeQuiz: state.quiz.current.round !== 0,
-      activeQuestion: state.quiz.current.question !== 0
+      active: state.quiz.current.round !== 0 && state.quiz.current.question !== 0,
     }, _id);
   }
 

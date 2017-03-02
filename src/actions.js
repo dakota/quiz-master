@@ -87,9 +87,9 @@ export function updateContestants(contestants, buzzed, correct)
   return {type: actions.UPDATE_CONTESTANTS, contestants, buzzed, correct}
 }
 
-export function updateContestant(_id, contestant, store = true)
+export function updateContestant(_id, contestant, active, store = true)
 {
-  return {type: actions.UPDATE_CONTESTANT, _id, contestant, store}
+  return {type: actions.UPDATE_CONTESTANT, _id, contestant, active, store}
 }
 
 export function updateContestantField(_id, field, value, store = true)

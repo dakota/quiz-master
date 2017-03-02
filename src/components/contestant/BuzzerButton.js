@@ -6,7 +6,8 @@ const mapStateToProps = (state) =>
 {
   return {
     buzzer: state.contestant.buzzer,
-    color: state.contestant.color
+    color: state.contestant.color,
+    active: state.active
   }
 }
 

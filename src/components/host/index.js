@@ -12,13 +12,23 @@ class Host extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <h3>Quiz Master 3000 Host</h3>
-        <Question />
-        <Contestants adminMode />
+    let buttons;
+
+    if (this.props.roundNumber === 0) {
+      buttons = (
         <div style={{marginTop: '30px'}}>
-          <Button disabled={!this.props.buzzed} colored raised ripple onClick={() => {
+          <Button raised ripple onClick={() =>
+          {
+            this.props.dispatch(nextQuestion());
+          }}>Start the quiz</Button>
+        </div>
+      );
+    } else {
+      buttons = (
+      <div>
+        <div style={{marginTop: '30px'}}>
+          <Button disabled={!this.props.buzzed} colored raised ripple onClick={() =>
+          {
             this.props.dispatch(correctAnswer());
           }}>Correct!</Button>
           <Button disabled={!this.props.buzzed} accent raised ripple onClick={() =>
@@ -30,7 +40,7 @@ class Host extends Component {
           <Button raised ripple onClick={() =>
           {
             this.props.dispatch(nextQuestion());
-          }}>Next question</Button>
+          }}>{this.props.questionNumber === 0 ? 'Start round' : 'Next question'}</Button>
         </div>
         <div style={{marginTop: '30px'}}>
           <Button raised ripple onClick={() =>
@@ -38,7 +48,16 @@ class Host extends Component {
             this.props.dispatch(clearBuzzers());
           }}>Clear buzzer</Button>
         </div>
+      </div>
+      );
+    }
 
+    return (
+      <div>
+        <h3>Quiz Master 3000 Host</h3>
+        <Question />
+        <Contestants adminMode />
+        {buttons}
       </div>
     );
   }
@@ -47,8 +66,9 @@ class Host extends Component {
 Host = connect((store) => {
   return {
     buzzed: store.contestants.buzzed,
-    question: store.question,
-    correct: store.contestants.correct
+    correct: store.contestants.correct,
+    roundNumber: store.question.roundNumber,
+    questionNumber: store.question.questionNumber
   }
 })(Host);
 

@@ -72,7 +72,7 @@ const socketMiddleware = (function ()
         if (state.class !== CLASS_CONTESTANT) {
           break;
         }
-        store.dispatch(updateContestant(command._id, command.contestant, false));
+        store.dispatch(updateContestant(command._id, command.contestant, command.active, false));
         break;
       case msg.QUESTION: {
         store.dispatch(setQuestion(command.name, command.roundNumber, command.questionNumber, command.question));

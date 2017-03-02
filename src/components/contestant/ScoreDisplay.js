@@ -4,7 +4,7 @@ class ScoreDisplay extends Component {
   render()
   {
     return (
-      <h4>{this.props.score}</h4>
+      <h3><strong>{this.props.score}</strong></h3>
     )
   }
 }

@@ -40,7 +40,9 @@ class Contestant extends Component {
     if (this.props.configured) {
       return (
         <div>
-          <Name /><Score />
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <Name /><Score />
+          </div>
           <BuzzerButton />
         </div>
       )

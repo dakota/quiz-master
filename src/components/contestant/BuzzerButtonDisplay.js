@@ -16,12 +16,16 @@ class BuzzerButtonDisplay extends Component {
         display = (<h4 className="text-error">Frozen out</h4>);
         break;
       default:
-        display = '';
+        if (this.props.active === false) {
+          display = (<h4 className="text-success">Waiting to start</h4>);
+        } else {
+          display = '';
+        }
     }
 
     return (
       <div>
-        <FABButton colored className={colorClass} ripple onClick={this.props.buzz} disabled={this.props.buzzer !== buzzer.READY}>
+        <FABButton colored className={colorClass} ripple onClick={this.props.buzz} disabled={this.props.buzzer !== buzzer.READY || this.props.active === false}>
           <Icon name="touch_app"/>
         </FABButton>
         {display}
