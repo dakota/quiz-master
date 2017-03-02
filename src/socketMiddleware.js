@@ -101,8 +101,10 @@ const socketMiddleware = (function ()
         //Send an action that shows a "connecting..." status for now
         store.dispatch(connecting());
 
+        const uri = 'ws://' + window.location.hostname + ':8080';
+
         //Attempt to connect (we could send a 'failed' action on error)
-        socket = new WebSocket(action.url, action.protocol);
+        socket = new WebSocket(uri, action.protocol);
         socket.onmessage = onMessage(socket, store);
         socket.onclose = onClose(socket, store);
         socket.onopen = onOpen(socket, store, action.token);

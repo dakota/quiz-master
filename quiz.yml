@@ -3,8 +3,8 @@
     questions:
       - question: Who was speaking?
         media:
-        - type: audio
-        - file: bp-speaking.mp3
+          type: audio
+          file: bp-speaking-1.mp3
         answer: Lord Baden-Powell
       - question: What was he speaking about?
         answer: The Scout Promise
