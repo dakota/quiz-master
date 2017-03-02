@@ -158,9 +158,9 @@ const serverMiddleware = (function ()
     if (forceQuestion === true || state.quiz.changed) {
       sendMessage(connection, msg.QUESTION, {
         roundNumber: state.quiz.current.round,
-        name: state.quiz.questions[state.quiz.current.round - 1].name,
+        name: state.quiz.current.round !== 0 ? state.quiz.questions[state.quiz.current.round - 1].name : '',
         questionNumber: state.quiz.current.question,
-        question: state.quiz.current.question === 0 ? null : state.quiz.questions[state.quiz.current.round - 1].questions[state.quiz.current.question - 1]
+        question: state.quiz.current.round === 0 || state.quiz.current.question === 0 ? null : state.quiz.questions[state.quiz.current.round - 1].questions[state.quiz.current.question - 1]
       }, _id);
     }
   }
@@ -179,6 +179,14 @@ const serverMiddleware = (function ()
     }
 
     store.dispatch({type: DISPLAY_UPDATED});
+  }
+
+  const updateContestant = (state, _id) => {
+    sendMessage(state.connections[_id], msg.UPDATE_CONTESTANT, {
+      contestant: state.contestants.contestants[_id],
+      activeQuiz: state.quiz.current.round !== 0,
+      activeQuestion: state.quiz.current.question !== 0
+    }, _id);
   }
 
   return store => next => action =>
@@ -246,9 +254,7 @@ const serverMiddleware = (function ()
         state = store.getState();
 
         for (let _id in state.contestants.contestants) {
-          sendMessage(state.connections[_id], msg.UPDATE_CONTESTANT, {
-            contestant: state.contestants.contestants[_id]
-          }, _id);
+          updateContestant(state, _id);
         }
 
         updateDisplays(store);
@@ -259,9 +265,7 @@ const serverMiddleware = (function ()
 
         state = store.getState();
         if (action._id) {
-          sendMessage(state.connections[action._id], msg.UPDATE_CONTESTANT, {
-            contestant: state.contestants.contestants[action._id]
-          }, action._id);
+          updateContestant(state, action._id);
         }
         updateDisplays(store);
 
@@ -273,10 +277,7 @@ const serverMiddleware = (function ()
         const _id = action.handshake._id;
 
         if (action.handshake.class === CLASS_CONTESTANT) {
-          sendMessage(action.connection, msg.UPDATE_CONTESTANT, {
-            contestant: state.contestants.contestants[_id]
-          }, _id);
-
+          updateContestant(state, _id);
           updateDisplays(store);
         }
 

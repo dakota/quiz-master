@@ -11,7 +11,7 @@ const loadQuiz = () => {
   return {
     changed: false,
     current: {
-      round: 1,
+      round: 0,
       question: 0
     },
     totalRounds: questions.length,
@@ -30,13 +30,13 @@ function quiz(state = loadQuiz(), action)
       newState.changed = true;
       newState.current.question++;
 
-      if (newState.current.question > state.questions[state.current.round - 1].total) {
+      if (newState.current.round === 0 || newState.current.question > state.questions[state.current.round - 1].total) {
         newState.current.round++;
         newState.current.question = 0;
       }
 
       if (newState.current.round > state.totalRounds) {
-        newState.current.round = 1;
+        newState.current.round = 0;
         newState.current.question = 0;
       }
 
