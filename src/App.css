@@ -2,14 +2,6 @@ body {
   overflow: hidden;
 }
 
-body, html {
-  height: 100%;
-}
-
-.full-height {
-  height: 100%;
-}
-
 h2 {
   font-size: 40px;
 }
@@ -44,6 +36,14 @@ h2 {
 
 .contestant:last-of-type {
   margin-right: 0;
+}
+
+.mdl-list__item {
+  border-right: 5px solid #a0a0a0;
+}
+
+.mdl-list__item:last-of-type {
+  border: 0;
 }
 
 header {

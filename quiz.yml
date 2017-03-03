@@ -33,7 +33,7 @@
         answer: 5 minutes
   - name: Scouting Trivia
     questions:
-      - question: Who was speaking?
+      - question: Who is speaking?
         media:
           type: audio
           file: bp-speaking-1.mp3
@@ -170,6 +170,7 @@
         media:
           type: video
           file: largest-clock.mp4
+        choices: [Düsseldorf, Mecca Royal Hotel, London, Burning Man]
         answer: Düsseldorf
       - question: A phlebotomist extracts what from the human body?
         choices: [Blood, Urine, Poop, Phlem]
@@ -227,6 +228,11 @@
           type: image
           file: double-bowline.jpg
         answer: Double Bowline
+      - question: Identify this knot
+        media:
+          type: image
+          file: water-bowline.jpg
+        answer: Water Bowline
       - question: Identify this lashing
         media:
           type: image
@@ -316,5 +322,5 @@
       - question: What instrument is this?
         media:
           type: image
-          file: art-hor.png
+          file: art-hor.jpg
         answer: Artificial Horizon

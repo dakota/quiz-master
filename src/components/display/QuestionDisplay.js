@@ -3,29 +3,6 @@ import {List, ListItem} from 'react-mdl';
 import Media from './Media';
 
 class QuestionDisplay extends Component {
-  constructor(props)
-  {
-    super(props);
-    this.state = {
-      showQuestion: false
-    };
-    this.finishedPlaying = this.finishedPlaying.bind(this);
-  }
-
-  componentWillReceiveProps(props)
-  {
-    this.setState({
-      showQuestion: !(props.question && props.question.media)
-    });
-  }
-
-  finishedPlaying()
-  {
-    this.setState({
-      showQuestion: true
-    });
-  }
-
   render()
   {
     if (this.props.roundNumber === undefined || this.props.questionNumber === 0) {
@@ -35,7 +12,7 @@ class QuestionDisplay extends Component {
     let choices;
     let choicesElement;
 
-    if (this.state.showQuestion && this.props.question.choices) {
+    if (this.props.question.choices) {
       choices = this.props.question.choices;
       choicesElement = (
         <List>
@@ -59,10 +36,8 @@ class QuestionDisplay extends Component {
 
     return (
       <div className="full-height">
-        <div style={{height: this.state.showQuestion ? '250px' : 'calc(100% - 300px)'}}>
-          <Media media={this.props.question.media} onFinish={this.finishedPlaying}/>
-        </div>
-        {this.state.showQuestion && <h3><strong>{this.props.questionNumber}.</strong> {this.props.question.question}</h3>}
+        <Media media={this.props.question.media}/>
+        <h3><strong>{this.props.questionNumber}.</strong> {this.props.question.question}</h3>
         {choicesElement}
       </div>
     );
