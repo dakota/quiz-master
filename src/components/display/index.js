@@ -25,7 +25,7 @@ class Display extends Component {
     }
 
     return (
-      <div>
+      <div className="full-height">
         <header>
           {header}
         </header>

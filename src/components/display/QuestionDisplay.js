@@ -58,8 +58,10 @@ class QuestionDisplay extends Component {
     }
 
     return (
-      <div>
-        <Media media={this.props.question.media} onFinish={this.finishedPlaying}/>
+      <div className="full-height">
+        <div style={{height: this.state.showQuestion ? '250px' : 'calc(100% - 300px)'}}>
+          <Media media={this.props.question.media} onFinish={this.finishedPlaying}/>
+        </div>
         {this.state.showQuestion && <h3><strong>{this.props.questionNumber}.</strong> {this.props.question.question}</h3>}
         {choicesElement}
       </div>

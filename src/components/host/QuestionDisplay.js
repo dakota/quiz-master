@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Media from './Media';
 
 class QuestionDisplay extends Component {
   render()
@@ -13,6 +14,7 @@ class QuestionDisplay extends Component {
         <div>
           <p><strong>{this.props.question.question}</strong></p>
           <p>{this.props.question.answer}</p>
+          <Media media={this.props.question.media}/>
         </div>
       );
     }

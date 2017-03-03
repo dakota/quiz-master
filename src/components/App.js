@@ -8,7 +8,7 @@ import Host from './host/index';
 class App extends Component {
   render() {
     return (
-      <div className="App mdl-typography--text-center" style={{width: '80%', margin: 'auto'}}>
+      <div className="App mdl-typography--text-center full-height" style={{width: '90%', margin: 'auto'}}>
         <div className="connection-status">
           <ConnectionStatus />
         </div>

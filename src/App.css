@@ -2,6 +2,18 @@ body {
   overflow: hidden;
 }
 
+body, html {
+  height: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+h2 {
+  font-size: 40px;
+}
+
 .connection-status {
   position: absolute;
   top: 10px;
@@ -9,6 +21,7 @@ body {
 }
 
 .contestants {
+  height: auto;
   position: absolute;
   bottom: 10px;
   left: 10px;
@@ -18,10 +31,11 @@ body {
 .contestant-container {
   display: flex;
   justify-content: space-between;
-  height: 200px;
+  height: 180px;
 }
 
 .contestant {
+  height: auto;
   flex-grow: 1;
   flex-basis: auto;
   transition: .25s all ease-in-out;
