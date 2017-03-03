@@ -16,8 +16,7 @@ class Display extends Component {
     let header;
     if(this.props.roundNumber && !this.props.end) {
       header = (<h2>
-        Quiz Master 3000 - Round {this.props.roundNumber}
-        {this.props.questionNumber !== 0 && <small>Question {this.props.questionNumber}</small>}
+        Quiz Master 3000 - Round {this.props.roundNumber} <small>{this.props.roundName}</small>
       </h2>);
     } else {
       header = (<h2>

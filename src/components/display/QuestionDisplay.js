@@ -60,7 +60,7 @@ class QuestionDisplay extends Component {
     return (
       <div>
         <Media media={this.props.question.media} onFinish={this.finishedPlaying}/>
-        {this.state.showQuestion && <h3><strong>{this.props.question.question}</strong></h3>}
+        {this.state.showQuestion && <h3><strong>{this.props.questionNumber}.</strong> {this.props.question.question}</h3>}
         {choicesElement}
       </div>
     );

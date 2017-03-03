@@ -14,13 +14,19 @@ class Media extends Component {
             <source src={'./media/' + this.props.media.file} />
           </audio>
         );
+      case 'video':
+        return (
+          <video autoPlay onEnded={this.props.onFinish} src={'./media/' + this.props.media.file} type="video/mp4" style={{maxHeight: '250px'}}>
+          </video>
+        );
       case 'image':
         this.props.onFinish();
-        return (<img src={'./media/' + this.props.media.file} style={{maxWidth: '100%', height: '300px'}}/>)
+        return (<img role="presentation" src={'./media/' + this.props.media.file} style={{maxWidth: '100%', height: '300px'}}/>);
+      default:
+        return (
+          <span></span>
+        )
     }
-    return (
-      <span></span>
-    )
   }
 }
 
