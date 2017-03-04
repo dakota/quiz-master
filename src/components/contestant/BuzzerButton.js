@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
  return {
    buzz: () => {
      clearTimeout(timer);
-     timer = setTimeout(dispatch(buzz()), 250);
+     timer = setTimeout(() => {dispatch(buzz())}, 250);
    }
  }
 }
