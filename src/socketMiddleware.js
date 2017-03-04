@@ -121,9 +121,9 @@ const socketMiddleware = (function ()
 
       //Send the 'BUZZED' action down the websocket to the server
       case actions.BUZZ:
-        socket.send(JSON.stringify({
-          msg: msg.BUZZED
-        }));
+          socket.send(JSON.stringify({
+            msg: msg.BUZZED
+          }));
 
         return next(action);
 

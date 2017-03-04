@@ -25,8 +25,8 @@ class BuzzerButtonDisplay extends Component {
 
     return (
       <div>
-        <FABButton colored className={colorClass} ripple onClick={this.props.buzz} disabled={this.props.buzzer !== buzzer.READY || this.props.active === false}>
-          <Icon name="touch_app"/>
+        <FABButton colored className={'big ' + colorClass} ripple onClick={this.props.buzz} disabled={this.props.buzzer !== buzzer.READY || this.props.active === false}>
+          Bzz
         </FABButton>
         {display}
       </div>

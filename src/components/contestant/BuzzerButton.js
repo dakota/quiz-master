@@ -11,10 +11,13 @@ const mapStateToProps = (state) =>
   }
 }
 
+let timer = 0;
+
 const mapDispatchToProps = (dispatch, ownProps) => {
  return {
    buzz: () => {
-     dispatch(buzz());
+     clearTimeout(timer);
+     timer = setTimeout(dispatch(buzz()), 250);
    }
  }
 }

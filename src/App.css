@@ -55,3 +55,8 @@ header {
   top: -100px;
   left: 10px;
 }
+
+.big {
+  width: 200px;
+  height: 200px;
+}

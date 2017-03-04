@@ -28,7 +28,7 @@
         choices:
           - Exactly 17.8 microfarads
           - Blue, because albatrosses are the largest flying birds.
-          - No no yellow because ostriches can fly they are just lazy jerks
+          - No no yellow because ostriches can fly they are just lazy
           - 5 minutes
         answer: 5 minutes
   - name: Scouting Trivia
@@ -57,9 +57,9 @@
         media:
           type: image
           file: dinizulu.jpg
-        answer: Dinizulu
+        answer: Dinuzulu kaCetshwayo
       - question: What did he have to do with Scouting?
-        answer: His necklas was the source of the Wood Badge beads
+        answer: His necklace was the source of the Wood Badge beads
       - question: Who was the founder of the American Girl Scout movement?
         answer: Juliette Gordon Low
       - question: 6th Scout Law?
@@ -77,7 +77,9 @@
           - A Scout is courteous
         answer: A Scout is not a fool
       - question: Who is the Chief Scout of the World?
-        answer: B-P
+        answer: Lord Baden Powell
+      - question: Who is the Chief Scout of the United Kingdom?
+        answer: Edward Michael "Bear" Grylls
       - question: Who is the Chief Scout of South Africa?
         answer: Sibusiso Vilane
       - question: First troop in South Africa?
@@ -113,11 +115,14 @@
       - question: What is the Tower called?
         answer: The John Trollop Tower
       - question: When was the Tower opened?
-        choices: [1956, 1985, 1921, 2005]
-        answer: 1956
+        choices: [1956, 1967, 1921, 2005]
+        answer: 1967
       - question: When was the Scout Hall opened?
-        choices: [1956, 1985, 1921, 2005]
-        answer: 1956
+        choices: [1956, 1985, 1921, 1959]
+        answer: 1959
+      - question: Who opened the Scout Hall?
+        choices: [Sidney Saks, George Lucas, Mayor Josef, A guy called james]
+        answer: Sidney Saks
       - question: Which Irene family donated the Scout Hall to 9th Irene?
         choices: [Van der Byl's, Ross's, Tanton's]
         answer: Van der Byl's
@@ -166,12 +171,12 @@
       - question: Maleficent is the main antagonist in which Walt Disney classic?
         choices: [Maleficent, Sleeping Beauty, Cinderella, Beauty and the Beast]
         answer: Sleeping Beauty
-      - question: Where is current largest clock in the world?
+      - question: In what country is current largest clock in the world?
         media:
           type: video
           file: largest-clock.mp4
-        choices: [Düsseldorf, Mecca Royal Hotel, London, Burning Man]
-        answer: Düsseldorf
+        choices: [Germany, Saudi Arabia, United Kingdom, United States of America]
+        answer: Germany
       - question: A phlebotomist extracts what from the human body?
         choices: [Blood, Urine, Poop, Phlem]
         answer: Blood
@@ -207,16 +212,16 @@
           file: cheetah.mp4
         choices: [SAAB Gripen, Atlas Cheetah, BAE Hawk, Mirage III]
         answer: Atlas Cheetah
-      - question: Identify the two aircraft
-        media:
-          type: video
-          file: spitfire-typhoon.mp4
-        answer: Spitfire and Typhoon
       - question: Identify the aircraft
         media:
           type: image
           file: impala-2.jpg
         answer: Impala
+      - question: Identify the two aircraft
+        media:
+          type: video
+          file: spitfire-typhoon.mp4
+        answer: Spitfire and Typhoon
   - name: Pioneering
     questions:
       - question: Tie a bowline
