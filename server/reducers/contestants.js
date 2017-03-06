@@ -80,10 +80,12 @@ function contestants(state = initialState, action)
     case REMOVE_CONTESTANT:
       delete newState.contestants[action._id];
 
-
-
       return newState;
     case BUZZ:
+      if (newState.buzzed) {
+        return newState;
+      }
+
       newState.correct = 0;
       newState.buzzed = true;
       newState.buzzee = action._id;
