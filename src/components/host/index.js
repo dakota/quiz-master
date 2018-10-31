@@ -1,77 +1,75 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import {withStyles} from '@material-ui/core/styles';
 
-import {configure, clearBuzzers, correctAnswer, incorrectAnswer, nextQuestion} from '../../actions';
-import { CLASS_HOST } from '../../constants';
+import {buzz, clearBuzzers, configure, correctAnswer, incorrectAnswer, nextQuestion} from '../../actions';
+import {CLASS_HOST} from '../../constants';
 import Contestants from '../display/Contestants';
 import Question from './Question';
+import throttle from 'lodash.throttle';
+
+const styles = {
+  wrapper: {
+    marginTop: 80
+  },
+  grow: {
+    flexGrow: 1
+  }
+};
 
 class Host extends Component {
-  componentWillMount() {
-    this.props.dispatch(configure(CLASS_HOST));
+  componentWillMount()
+  {
+    this.props.setClass(CLASS_HOST);
   }
 
-  render() {
-    let buttons;
-
-    if (this.props.roundNumber === 0) {
-      buttons = (
-        <div style={{marginTop: '30px'}}>
-          <Button variant="contained" color="primary" onClick={() =>
-          {
-            this.props.dispatch(nextQuestion());
-          }}>Start the quiz</Button>
-        </div>
-      );
-    } else if (!this.props.end) {
-      buttons = (
-      <div>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <div style={{marginTop: '30px'}}>
-            <Button disabled={!this.props.buzzed} variant="contained" color="primary" onClick={() =>
-            {
-              this.props.dispatch(correctAnswer());
-            }}>Correct!</Button>
-            <Button disabled={!this.props.buzzed} variant="contained" color="secondary" onClick={() =>
-            {
-              this.props.dispatch(incorrectAnswer());
-            }}>Incorrect</Button>
-          </div>
-          <div style={{marginTop: '30px'}}>
-            <Button variant="contained" disabled={this.props.contestantCount > 0 && this.props.questionNumber !== 0 && (this.props.correct === 0 || this.props.correct === -1)} onClick={() =>
-            {
-              this.props.dispatch(nextQuestion());
-            }}>{this.props.questionNumber === 0 ? 'Start round' : 'Next question'}</Button>
-          </div>
-        </div>
-        <div style={{position: 'absolute', bottom: '10px'}}>
-          <Button variant="contained" onClick={() =>
-          {
-            this.props.dispatch(clearBuzzers());
-          }}>Clear buzzer</Button>
-        </div>
-      </div>
-      );
-    } else {
-      buttons = (<div style={{marginTop: '30px'}}>
-        <Button variant="contained" onClick={() =>
-        {
-          this.props.dispatch(nextQuestion());
-        }}>Restart the quiz</Button>
-      </div>)
-    }
+  render()
+  {
+    const {classes, roundNumber, onCorrect, end, onIncorrect, onClear, onNext, questionNumber, question, contestantCount, buzzed, correct} = this.props;
 
     return (
       <div>
-        <h3>Quiz Master 3000 Host</h3>
-        <Question />
-        <Contestants adminMode />
-        {buttons}
+        <AppBar>
+          <Toolbar>
+            <Typography variant="h6" color="inherit" className={classes.grow}>Quiz Master 3000 Host</Typography>
+            {roundNumber === 0 && <Button
+              color="inherit"
+              disabled={contestantCount === 0}
+              onClick={onNext}>Start the quiz</Button>}
+            {roundNumber !== 0 && !this.props.end && <Button color="inherit" onClick={onClear}>Clear buzzer</Button>}
+          </Toolbar>
+        </AppBar>
+        <div className={classes.wrapper}>
+          {roundNumber !== 0 && <Question
+            onCorrect={onCorrect}
+            onIncorrect={onIncorrect}
+            onNext={onNext}
+            roundNumber={roundNumber}
+            questionNumber={questionNumber}
+            question={question}
+            disabled={contestantCount === 0}
+            buzzed={buzzed}
+            correct={correct}
+          />}
+          {roundNumber !== 0 && end && <Button variant="contained" onClick={onNext}>Restart the quiz</Button>}
+          <Contestants adminMode/>
+        </div>
       </div>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setClass: (connectionClass) => dispatch(configure(connectionClass)),
+  onCorrect: () => dispatch(correctAnswer()),
+  onIncorrect: () => dispatch(incorrectAnswer()),
+  onNext: () => dispatch(nextQuestion()),
+  onClear: () => dispatch(clearBuzzers())
+});
 
 Host = connect((store) => {
   return {
@@ -80,8 +78,9 @@ Host = connect((store) => {
     correct: store.contestants.correct,
     roundNumber: store.question.roundNumber,
     questionNumber: store.question.questionNumber,
-    contestantCount: Object.entries(store.contestants.contestants).length
+    contestantCount: Object.entries(store.contestants.contestants).length,
+    question: store.question.question,
   }
-})(Host);
+}, mapDispatchToProps)(Host);
 
-export default Host;
+export default withStyles(styles)(Host);

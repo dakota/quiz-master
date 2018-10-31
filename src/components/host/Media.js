@@ -1,21 +1,28 @@
 import React, {Component} from 'react';
+import CardMedia from '@material-ui/core/CardMedia';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = {
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+};
 
 class Media extends Component {
   render()
   {
     if (!this.props.media) {
-      return (<span></span>);
+      return null
     }
 
     switch (this.props.media.type) {
       case 'image':
-        return (<img alt="presentation" src={'./media/' + this.props.media.file} style={{maxWidth: '100%', height: '100px'}}/>);
+        return <CardMedia image={'./media/' + this.props.media.file} className={this.props.classes.media} />;
       default:
-        return (
-          <span></span>
-        )
+        return null;
     }
   }
 }
 
-export default Media;
+export default withStyles(styles)(Media);

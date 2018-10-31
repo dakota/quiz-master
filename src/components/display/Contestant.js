@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import classnames from 'classnames';
+import * as colors from '@material-ui/core/colors';
 import CardHeader from '@material-ui/core/CardHeader';
 import Menu from './Menu';
 import {buzzer} from '../../constants';
@@ -46,24 +47,23 @@ class Contestants extends Component {
       READY: 500,
       BUZZED: 100,
       FROZEN: 100,
-    }
-    let colorClass = 'mdl-color--' + this.props.contestant.color + '-';
+    };
+    const colorMap = typeof colors[this.props.contestant.color] !== 'undefined' ? colors[this.props.contestant.color] : colors.amber;
+    let color;
 
     if (this.props.correct === true) {
-      colorClass += '900';
+      color = colorMap[900];
     } else {
-      colorClass += (this.props.contestant.buzzer === buzzer.BUZZED && !this.state.flashState ? 800 : stateMap[contestant.buzzer]);
+      color = colorMap[(this.props.contestant.buzzer === buzzer.BUZZED && !this.state.flashState ? 800 : stateMap[contestant.buzzer])];
     }
 
     return (
-      <Card raised className={colorClass + ' contestant'}>
+      <Card raised className={this.props.className} style={{backgroundColor: color}}>
         <CardHeader
-          title={contestant.name}
-          actio={this.props.adminMode && <Menu contestant={contestant} updateValue={this.props.updateValue}/>}
+          title={contestant.score}
+          action={this.props.adminMode && <Menu contestant={contestant} updateValue={this.props.updateValue}/>}
+          subheader={contestant.name}
         />
-        <CardContent>
-          <h2>{contestant.score}</h2>
-        </CardContent>
       </Card>
     )
   }
