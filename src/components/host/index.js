@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import Button from '@material-ui/core/Button';
+
 import {configure, clearBuzzers, correctAnswer, incorrectAnswer, nextQuestion} from '../../actions';
 import { CLASS_HOST } from '../../constants';
 import Contestants from '../display/Contestants';
-import {Button} from 'react-mdl';
 import Question from './Question';
 
 class Host extends Component {
@@ -17,7 +18,7 @@ class Host extends Component {
     if (this.props.roundNumber === 0) {
       buttons = (
         <div style={{marginTop: '30px'}}>
-          <Button raised ripple onClick={() =>
+          <Button variant="contained" color="primary" onClick={() =>
           {
             this.props.dispatch(nextQuestion());
           }}>Start the quiz</Button>
@@ -28,24 +29,24 @@ class Host extends Component {
       <div>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
           <div style={{marginTop: '30px'}}>
-            <Button disabled={!this.props.buzzed} colored raised ripple onClick={() =>
+            <Button disabled={!this.props.buzzed} variant="contained" color="primary" onClick={() =>
             {
               this.props.dispatch(correctAnswer());
             }}>Correct!</Button>
-            <Button disabled={!this.props.buzzed} accent raised ripple onClick={() =>
+            <Button disabled={!this.props.buzzed} variant="contained" color="secondary" onClick={() =>
             {
               this.props.dispatch(incorrectAnswer());
             }}>Incorrect</Button>
           </div>
           <div style={{marginTop: '30px'}}>
-            <Button raised ripple disabled={this.props.contestantCount > 0 && this.props.questionNumber !== 0 && (this.props.correct === 0 || this.props.correct === -1)} onClick={() =>
+            <Button variant="contained" disabled={this.props.contestantCount > 0 && this.props.questionNumber !== 0 && (this.props.correct === 0 || this.props.correct === -1)} onClick={() =>
             {
               this.props.dispatch(nextQuestion());
             }}>{this.props.questionNumber === 0 ? 'Start round' : 'Next question'}</Button>
           </div>
         </div>
         <div style={{position: 'absolute', bottom: '10px'}}>
-          <Button raised ripple onClick={() =>
+          <Button variant="contained" onClick={() =>
           {
             this.props.dispatch(clearBuzzers());
           }}>Clear buzzer</Button>
@@ -54,7 +55,7 @@ class Host extends Component {
       );
     } else {
       buttons = (<div style={{marginTop: '30px'}}>
-        <Button raised ripple onClick={() =>
+        <Button variant="contained" onClick={() =>
         {
           this.props.dispatch(nextQuestion());
         }}>Restart the quiz</Button>

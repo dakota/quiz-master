@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {CLASS_CONTESTANT} from '../../constants';
-import {Button, Textfield} from 'react-mdl';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import {configure} from '../../actions';
 
 class Configuration extends Component {
-  start() {
-    const name = this.refs.name.inputRef.value;
+  state = {
+    name: ''
+  }
 
-    this.props.dispatch(configure(CLASS_CONTESTANT, name));
+  start() {
+    this.props.dispatch(configure(CLASS_CONTESTANT, this.state.name));
   }
 
   render()
@@ -19,13 +22,13 @@ class Configuration extends Component {
 
         <div>
           <p>What is your name?</p>
-          <Textfield
+          <TextField
             label="My name is"
-            ref="name"
-            floatingLabel
+            value={this.state.name}
+            onChange={(event) => this.setState({name: event.target.value})}
           />
           <div>
-            <Button raised ripple onClick={() => this.start()}>Start playing</Button>
+            <Button variant="contained" color="primary" onClick={() => this.start()}>Start playing</Button>
           </div>
         </div>
       </div>

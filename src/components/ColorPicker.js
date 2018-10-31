@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {RadioGroup, Radio} from 'react-mdl';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import {COLORS} from '../constants';
 
 class ColorPicker extends Component {

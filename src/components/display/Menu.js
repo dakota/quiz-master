@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
-import {
-  CardMenu,
-  IconButton,
-  Menu,
-  MenuItem,
-  Dialog,
-  DialogActions,
-  DialogTitle,
-  DialogContent,
-  Button
-} from 'react-mdl';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
 import ColorPicker from '../ColorPicker';
 
 class Contestants extends Component {
@@ -50,24 +48,21 @@ class Contestants extends Component {
   {
     const contestant = this.props.contestant;
 
-    const colorPicker = (<ColorPicker ref='colorPicker' value={contestant.color}/>)
+    const colorPicker = (<ColorPicker ref='colorPicker' value={contestant.color}/>);
 
     return (
-      <CardMenu style={{color: '#fff'}}>
-        <IconButton name="more_vert" id={'contestant-menu-' + contestant._id}/>
-        <Menu target={'contestant-menu-' + contestant._id} align="right">
-          <MenuItem onClick={() =>
-          {
-            this.handleOpenDialog('Change color?', colorPicker, this.updateColor);
-          }}>Change color</MenuItem>
-          <MenuItem onClick={() =>
-          {
-            this.handleOpenDialog('New score:');
-          }}>Change score</MenuItem>
-          <MenuItem onClick={() =>
-          {
-            this.props.buzzer(contestant._id)
-          }}>Trigger buzzer</MenuItem>
+      <>
+        <IconButton
+          aria-label="More"
+          aria-haspopup="true"
+          onClick={this.handleClick}
+        >
+          <MoreVertIcon/>
+        </IconButton>
+        <Menu align="right">
+          <MenuItem onClick={() => this.handleOpenDialog('Change color?', colorPicker, this.updateColor)}>Change color</MenuItem>
+          <MenuItem onClick={() => this.handleOpenDialog('New score:')}>Change score</MenuItem>
+          <MenuItem onClick={() => this.props.buzzer(contestant._id)}>Trigger buzzer</MenuItem>
         </Menu>
         <Dialog open={this.state.openDialog}>
           <DialogTitle>{this.state.dialogTitle}</DialogTitle>
@@ -79,7 +74,7 @@ class Contestants extends Component {
             <Button type='button' onClick={this.handleCloseDialog}>Cancel</Button>
           </DialogActions>
         </Dialog>
-      </CardMenu>
+      </>
     )
   }
 }

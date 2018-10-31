@@ -1,9 +1,8 @@
-import React, {Component, PropTypes} from 'react';
-import {
-  Card,
-  CardTitle,
-  CardActions,
-} from 'react-mdl';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 import Menu from './Menu';
 import {buzzer} from '../../constants';
 
@@ -57,32 +56,27 @@ class Contestants extends Component {
     }
 
     return (
-      <Card shadow={1} className={colorClass + ' contestant'}>
-        <CardTitle expand style={{alignItems: 'flex-start', color: '#fff', textAlign: 'center'}}>
-          <h3 style={{textAlign: 'center', width: '100%'}}>{contestant.name}</h3>
-        </CardTitle>
-        <CardActions border style={{
-          borderColor: 'rgba(255, 255, 255, 0.2)',
-          display: 'flex',
-          boxSizing: 'border-box',
-          alignItems: 'center',
-          color: '#fff'
-        }}>
-          <div className="mdl-layout-spacer"></div>
+      <Card raised className={colorClass + ' contestant'}>
+        <CardHeader
+          title={contestant.name}
+          actio={this.props.adminMode && <Menu contestant={contestant} updateValue={this.props.updateValue}/>}
+        />
+        <CardContent>
           <h2>{contestant.score}</h2>
-        </CardActions>
-        {this.props.adminMode && <Menu contestant={contestant} updateValue={this.props.updateValue}/> }
+        </CardContent>
       </Card>
     )
   }
 }
 
 Contestants.propTypes = {
-  correct: PropTypes.bool
+  correct: PropTypes.bool,
+  adminMode: PropTypes.bool
 };
 
 Contestants.defaultProps = {
-  correct: false
+  correct: false,
+  adminMode: false
 };
 
 export default Contestants;

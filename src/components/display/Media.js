@@ -24,7 +24,7 @@ class Media extends Component {
           </video>
         );
       case 'image':
-        return (<img role="presentation" src={'./media/' + this.props.media.file} style={{maxWidth: '100%', height: '350px'}}/>);
+        return (<img alt="presentation" src={'./media/' + this.props.media.file} style={{maxWidth: '100%', height: '350px'}}/>);
       default:
         return (
           <span></span>

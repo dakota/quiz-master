@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import {List, ListItem} from 'react-mdl';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+
 import Media from './Media';
 
 class QuestionDisplay extends Component {
@@ -17,13 +20,17 @@ class QuestionDisplay extends Component {
       choicesElement = (
         <List>
           {choices.map((choice) => {
+            let selected = false;
+            let choiceDisplay;
             if (this.props.correct && choice === this.props.question.answer) {
-              choice = (<h3><strong>{choice}</strong></h3>);
+              choiceDisplay = (<h3><strong>{choice}</strong></h3>);
+              selected = true;
             } else {
-              choice = (<h4>{choice}</h4>)
+              choiceDisplay = (<h4>{choice}</h4>);
+              selected = false;
             }
-            return (<ListItem style={{display: 'inline-block'}}>
-              {choice}
+            return (<ListItem selected={selected}>
+              <ListItemText primary={choiceDisplay} />
             </ListItem>)
           })}
         </List>

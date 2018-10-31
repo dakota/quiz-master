@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {buzzer} from '../../constants';
-import {FABButton, Icon} from 'react-mdl';
+import Button from '@material-ui/core/Button';
+import AlarmIcon from '@material-ui/icons/Alarm'
 
 class BuzzerButtonDisplay extends Component {
   render()
   {
     let display;
-    const colorClass = 'mdl-color--' + this.props.color + '-500';
 
     switch (this.props.buzzer) {
       case buzzer.BUZZED:
@@ -25,9 +25,14 @@ class BuzzerButtonDisplay extends Component {
 
     return (
       <div>
-        <FABButton colored className={'big ' + colorClass} ripple onClick={this.props.buzz} disabled={this.props.buzzer !== buzzer.READY || this.props.active === false}>
-          Bzz
-        </FABButton>
+        <Button variant="fab"
+                color="primary"
+                onClick={this.props.buzz}
+                disabled={this.props.buzzer !== buzzer.READY || this.props.active === false}
+                size="large"
+        >
+          <AlarmIcon />
+        </Button>
         {display}
       </div>
     )

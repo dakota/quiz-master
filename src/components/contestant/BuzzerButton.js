@@ -1,4 +1,6 @@
 import {connect} from 'react-redux'
+import throttle from 'lodash.throttle';
+
 import BuzzerButtonDisplay from './BuzzerButtonDisplay';
 import {buzz} from '../../actions';
 
@@ -6,25 +8,19 @@ const mapStateToProps = (state) =>
 {
   return {
     buzzer: state.contestant.buzzer,
-    color: state.contestant.color,
     active: state.active
   }
-}
-
-let timer = 0;
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
  return {
-   buzz: () => {
-     clearTimeout(timer);
-     timer = setTimeout(() => {dispatch(buzz())}, 250);
-   }
+   buzz: throttle(() => dispatch(buzz()), 250)
  }
-}
+};
 
 const BuzzerButton = connect(
   mapStateToProps,
   mapDispatchToProps
-)(BuzzerButtonDisplay)
+)(BuzzerButtonDisplay);
 
 export default BuzzerButton

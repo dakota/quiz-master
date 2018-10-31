@@ -9,7 +9,7 @@ class Media extends Component {
 
     switch (this.props.media.type) {
       case 'image':
-        return (<img role="presentation" src={'./media/' + this.props.media.file} style={{maxWidth: '100%', height: '100px'}}/>);
+        return (<img alt="presentation" src={'./media/' + this.props.media.file} style={{maxWidth: '100%', height: '100px'}}/>);
       default:
         return (
           <span></span>

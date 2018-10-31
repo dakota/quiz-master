@@ -7,6 +7,8 @@ import BuzzerButton from './BuzzerButton';
 import Configuration from './Configuration';
 import {configure} from '../../actions';
 import store from '../../store';
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import * as colors from '@material-ui/core/colors';
 
 class Contestant extends Component {
   constructor(props)
@@ -14,12 +16,18 @@ class Contestant extends Component {
     super(props);
     this.state = {
       rehydrated: false
-    }
+    };
+
+    this.theme = createMuiTheme({
+      palette: {
+        primary: typeof colors[props.color] !== 'undefined' ? colors[props.color] : colors.amber,
+      },
+    });
   }
 
   componentWillMount()
   {
-    persistStore(store, {whitelist: ['id', 'class', 'contestant']}, () =>
+    persistStore(store, {}, () =>
     {
       this.setState({rehydrated: true});
       if (this.props.name) {
@@ -36,32 +44,26 @@ class Contestant extends Component {
       )
     }
 
-    if (this.props.configured) {
-      return (
-        <div>
-          <div style={{display: 'flex', justifyContent: 'space-between'}}>
-            <Name /><Score />
-          </div>
-          <BuzzerButton />
-        </div>
-      )
+    if (!this.props.configured) {
+      return (<Configuration/>);
     }
 
     return (
-      <div>
-        <Configuration />
-      </div>
+      <MuiThemeProvider theme={this.theme}>
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <Name/><Score/>
+        </div>
+        <BuzzerButton/>
+      </MuiThemeProvider>
     );
   }
 }
 
-Contestant = connect((store) =>
-{
-  return {
+Contestant = connect((store) => ({
     configured: store.configured,
     class: store.class,
-    name: store.contestant.name
-  };
-})(Contestant);
+    name: store.contestant.name,
+    color: store.contestant.color
+}))(Contestant);
 
 export default Contestant;
