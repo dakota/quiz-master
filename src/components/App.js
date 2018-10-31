@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import {Router, Route} from 'react-router';
-import ConnectionStatus from './ConnectionStatus';
+import React, {PureComponent } from 'react';
+import {Router, Route} from 'react-router-dom';
+
+import {withStyles} from '@material-ui/core/styles';
 import Contestant from './contestant/index';
 import Display from './display/index';
 import Host from './host/index';
@@ -8,14 +9,18 @@ import createBrowserHistory from "history/createBrowserHistory";
 
 const history = createBrowserHistory();
 
-class App extends Component {
+const styles = {
+  root: {
+    width: '100%',
+    margin: 'auto'
+  }
+};
+
+class App extends PureComponent {
   render() {
     return (
       <Router history={history}>
-        <div className="App full-height" style={{width: '90%', margin: 'auto'}}>
-          <div className="connection-status">
-            <ConnectionStatus />
-          </div>
+        <div className={this.props.classes.root}>
           <Route path="/" exact component={Contestant}/>
           <Route path="/host" component={Host}/>
           <Route path="/display" component={Display}/>
@@ -25,4 +30,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withStyles(styles)(App);

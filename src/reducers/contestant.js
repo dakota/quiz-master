@@ -1,6 +1,3 @@
-import {persistReducer} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-
 import {buzzer, actions} from '../constants';
 
 const initialState = {
@@ -8,12 +5,6 @@ const initialState = {
   color: '',
   score: 0,
   name: '',
-};
-
-const contestantPersistConfig = {
-  key: 'contestant',
-  storage: storage,
-  whitelist: ['id', 'class', 'contestant']
 };
 
 function contestant(state = initialState, action)
@@ -30,4 +21,4 @@ function contestant(state = initialState, action)
   }
 }
 
-export default persistReducer(contestantPersistConfig, contestant)
+export default contestant

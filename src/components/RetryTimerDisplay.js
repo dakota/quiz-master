@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
+import Button from '@material-ui/core/Button';
 
 class RetryTimerDisplay extends Component {
   render()
   {
     if (this.props.retryTimer >= 0 && this.props.configured) {
       return (
-        <span>Retrying connection in {this.props.retryTimer} seconds. <a onClick={e => {
+        <span>Retrying connection in {this.props.retryTimer} seconds. <Button onClick={e => {
           e.preventDefault();
           this.props.onClick();
-        }}>Retry now</a>
+        }}>Retry now</Button>
         </span>
       )
-    } else {
-      return (<span></span>)
     }
+
+    return null;
   }
 }
 
