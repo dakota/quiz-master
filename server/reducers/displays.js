@@ -1,5 +1,5 @@
 import {connection} from '../actions';
-import {CLASS_DISPLAY} from '../../src/constants';
+import {CLASS_DISPLAY} from '../constants';
 
 const initialState = []
 

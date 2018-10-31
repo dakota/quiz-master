@@ -22,7 +22,7 @@ import {
 import {
   msg,
   CLASS_CONTESTANT
-} from '../src/constants';
+} from './constants';
 
 const serverMiddleware = (function ()
 {

@@ -1,5 +1,5 @@
 import {connection} from '../actions';
-import {CLASS_HOST} from '../../src/constants';
+import {CLASS_HOST} from '../constants';
 
 const initialState = null
 

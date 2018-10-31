@@ -1,5 +1,5 @@
 import {connection, BUZZ, REMOVE_CONTESTANT, CHANGE_CONTESTANT_FIELD, CLEAR_BUZZER, ANSWER, NEXT_QUESTION} from '../actions';
-import {CLASS_CONTESTANT, buzzer, COLORS} from '../../src/constants';
+import {CLASS_CONTESTANT, buzzer, COLORS} from '../constants';
 
 const initialState = {
   buzzed: false,
