@@ -1,29 +1,29 @@
 ---
   - name: Systems check
     questions:
-      - question: The Patrol who's aircraft this is, please answer
-        media:
-          type: image
-          file: jaguar.jpg
-        answer: Jaguar
-      - question: The Patrol this is a video of their aircraft, please answer
-        media:
-          type: video
-          file: buccaneer.mp4
-        answer: Buccaneer
-      - question: The Patrol who's name is Spitfire, please answer
-        choices: [Spitfire, Jaguar, Grippen, P-51, F-16]
-        answer: Spitfire
-      - question: The Patrol who's aircraft sounds like this, please answer
-        media:
-          type: audio
-          file: mirage.mp3
-        answer: Mirage
-      - question: The Patrol who's aircraft these guys used to fly, please answer
-        media:
-          type: image
-          file: impala.jpg
-        answer: Impala
+#      - question: The Patrol who's aircraft this is, please answer
+#        media:
+#          type: image
+#          file: jaguar.jpg
+#        answer: Jaguar
+#      - question: The Patrol this is a video of their aircraft, please answer
+#        media:
+#          type: video
+#          file: buccaneer.mp4
+#        answer: Buccaneer
+#      - question: The Patrol who's name is Spitfire, please answer
+#        choices: [Spitfire, Jaguar, Grippen, P-51, F-16]
+#        answer: Spitfire
+#      - question: The Patrol who's aircraft sounds like this, please answer
+#        media:
+#          type: audio
+#          file: mirage.mp3
+#        answer: Mirage
+#      - question: The Patrol who's aircraft these guys used to fly, please answer
+#        media:
+#          type: image
+#          file: impala.jpg
+#        answer: Impala
       - question: If John has R30 and Jim has a duck, when traveling to Johannesburg at 60km/h, how long does it take Sarah to eat a cheese burger?
         choices:
           - Exactly 17.8 microfarads

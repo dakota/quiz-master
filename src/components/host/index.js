@@ -10,6 +10,7 @@ import {clearBuzzers, configure, correctAnswer, incorrectAnswer, nextQuestion} f
 import {CLASS_HOST} from '../../constants';
 import Contestants from '../display/Contestants';
 import Question from './Question';
+import ConnectionStatus from '../ConnectionStatus';
 
 const styles = {
   wrapper: {
@@ -35,11 +36,14 @@ class Host extends Component {
         <AppBar>
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>Quiz Master 3000 Host</Typography>
-            {roundNumber === 0 && <Button
-              color="inherit"
-              disabled={contestantCount === 0}
-              onClick={onNext}>Start the quiz</Button>}
-            {roundNumber !== 0 && !this.props.end && <Button color="inherit" onClick={onClear}>Clear buzzer</Button>}
+            <div>
+              {roundNumber === 0 && <Button
+                color="inherit"
+                disabled={contestantCount === 0}
+                onClick={onNext}>Start the quiz</Button>}
+              {roundNumber !== 0 && !this.props.end && <Button color="inherit" onClick={onClear}>Clear buzzer</Button>}
+              <ConnectionStatus/>
+            </div>
           </Toolbar>
         </AppBar>
         <div className={classes.wrapper}>

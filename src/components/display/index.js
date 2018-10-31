@@ -1,9 +1,22 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import Typography from '@material-ui/core/Typography';
+import {withStyles} from '@material-ui/core/styles';
+
 import {configure} from '../../actions';
 import {CLASS_DISPLAY} from '../../constants';
 import Contestants from './Contestants';
 import Question from './Question';
+import ConnectionStatus from '../ConnectionStatus';
+
+const styles = {
+  grow: {
+    flexGrow: 1
+  },
+  header: {
+    display: 'flex'
+  }
+};
 
 class Display extends Component {
   componentWillMount()
@@ -13,21 +26,15 @@ class Display extends Component {
 
   render()
   {
-    let header;
-    if(this.props.roundNumber && !this.props.end) {
-      header = (<h2>
-        Quiz Master 3000 - Round {this.props.roundNumber} <small>{this.props.roundName}</small>
-      </h2>);
-    } else {
-      header = (<h2>
-        Quiz Master 3000
-      </h2>);
-    }
+    const {classes} = this.props;
 
     return (
       <div className="full-height">
-        <header>
-          {header}
+        <header className={classes.header}>
+          <Typography variant="h2" className={classes.grow}>
+            Quiz Master 3000
+          </Typography>
+          <ConnectionStatus/>
         </header>
         <Question />
         <Contestants />
@@ -47,4 +54,4 @@ Display = connect(
   }
 )(Display);
 
-export default Display;
+export default withStyles(styles)(Display);

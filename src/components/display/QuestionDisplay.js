@@ -1,54 +1,90 @@
 import React, {Component} from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import CheckBoxEmpty from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxChecked from '@material-ui/icons/CheckBox';
+import {withStyles} from '@material-ui/core/styles';
 
 import Media from './Media';
 
+const styles = {
+  card: {
+    maxWidth: '60%',
+    margin: '10px auto'
+  },
+};
+
 class QuestionDisplay extends Component {
-  render()
+  renderChoices()
   {
-    if (this.props.roundNumber === undefined || this.props.questionNumber === 0) {
-      return (<span></span>);
-    }
+    const {question, correct} = this.props;
 
-    let choices;
-    let choicesElement;
-
-    if (this.props.question.choices) {
-      choices = this.props.question.choices;
-      choicesElement = (
-        <List>
-          {choices.map((choice) => {
-            let selected = false;
-            let choiceDisplay;
-            if (this.props.correct && choice === this.props.question.answer) {
-              choiceDisplay = (<h3><strong>{choice}</strong></h3>);
-              selected = true;
-            } else {
-              choiceDisplay = (<h4>{choice}</h4>);
-              selected = false;
-            }
-            return (<ListItem selected={selected}>
-              <ListItemText primary={choiceDisplay} />
-            </ListItem>)
-          })}
-        </List>
-      );
-    } else if (this.props.correct) {
-      choicesElement = (
-        <h3><strong>{this.props.question.answer}</strong></h3>
-      )
+    if (!question.choices) {
+      return;
     }
 
     return (
-      <div className="full-height">
-        <Media media={this.props.question.media}/>
-        <h3><strong>{this.props.questionNumber}.</strong> {this.props.question.question}</h3>
-        {choicesElement}
-      </div>
+      <CardContent>
+        <List>
+          {question.choices.map((choice) => {
+            return (<ListItem selected={correct && choice === question.answer}>
+              <ListItemIcon>
+                {correct && choice === question.answer && <CheckBoxChecked />}
+                {(!correct || choice !== question.answer) && <CheckBoxEmpty/>}
+              </ListItemIcon>
+              <ListItemText primary={<Typography variant="h5">{choice}</Typography>} />
+            </ListItem>)
+          })}
+        </List>
+      </CardContent>
+    );
+  }
+
+  render()
+  {
+    const {classes, correct, roundNumber, roundName, questionNumber, question} = this.props;
+    let cardContent;
+
+    if (roundNumber === undefined || roundNumber === 0) {
+      cardContent = (
+        <CardHeader
+          title="Waiting for the quiz to start"
+          subheader="Please join the game"
+        />
+      );
+    } else if (questionNumber === 0) {
+      cardContent = (
+        <CardHeader
+          title={`Round ${roundNumber} - ${roundName}`}
+          subheader={`Round ${roundNumber} is about to start`}
+        />
+      );
+    } else {
+      cardContent = <>
+        <CardHeader
+          title={question.question}
+          subheader={`Round ${roundNumber} - ${roundName} (Question ${questionNumber})`}
+        />
+        <Media media={question.media}/>
+        {correct && !question.choices && <CardContent>
+          <Typography variant="h5">The correct answer was: <strong>{this.props.question.answer}</strong></Typography>
+        </CardContent>}
+        {this.renderChoices()}
+      </>;
+    }
+
+    return (
+      <Card raised className={classes.card}>
+        {cardContent}
+      </Card>
     );
   }
 }
 
-export default QuestionDisplay;
+export default withStyles(styles)(QuestionDisplay);

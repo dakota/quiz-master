@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Contestant from './Contestant';
 import {withStyles} from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
   displayWrapper: {
@@ -45,10 +46,10 @@ class Contestants extends Component {
     return (
       <div className={this.props.adminMode ? classes.adminWrapper: classes.displayWrapper}>
         <div className="correct">
-          {!this.props.adminMode && !(this.props.correct <= 0) && <h1>Correct!</h1>}
-          {!this.props.adminMode && this.props.correct === -1 && <h1>Incorrect!</h1>}
-          {!this.props.adminMode && this.props.correct === -2 && <h1>Nobody got it right!</h1>}
-          {this.props.end && winner !== '' && <h1>Congratulations to {winner}!</h1>}
+          {!this.props.adminMode && !(this.props.correct <= 0) && <Typography variant="h1">Correct!</Typography>}
+          {!this.props.adminMode && this.props.correct === -1 && <Typography variant="h1">Incorrect!</Typography>}
+          {!this.props.adminMode && this.props.correct === -2 && <Typography variant="h1">Nobody got it right!</Typography>}
+          {this.props.end && winner !== '' && <Typography variant="h1">Congratulations to {winner}!</Typography>}
         </div>
         <div className={classes.contestants}>
         {contestants.map((contestant) => {
