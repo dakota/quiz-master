@@ -79,7 +79,6 @@ class Contestants extends Component {
         >
           <MenuItem onClick={() => this.handleOpenDialog('Change color?', colorPicker, this.updateColor)}>Change color</MenuItem>
           <MenuItem onClick={() => this.handleOpenDialog('New score:')}>Change score</MenuItem>
-          <MenuItem onClick={() => this.props.buzzer(contestant._id)}>Trigger buzzer</MenuItem>
         </Menu>
         <Dialog open={this.state.openDialog}>
           <DialogTitle>{this.state.dialogTitle}</DialogTitle>

@@ -20,6 +20,12 @@ const styles = {
   },
   contestant: {
     marginRight: 20
+  },
+  correct: {
+    position: 'absolute',
+    top: -100,
+    left: 10,
+    textAlign: 'center'
   }
 };
 
@@ -45,11 +51,8 @@ class Contestants extends Component {
 
     return (
       <div className={this.props.adminMode ? classes.adminWrapper: classes.displayWrapper}>
-        <div className="correct">
-          {!this.props.adminMode && !(this.props.correct <= 0) && <Typography variant="h1">Correct!</Typography>}
-          {!this.props.adminMode && this.props.correct === -1 && <Typography variant="h1">Incorrect!</Typography>}
-          {!this.props.adminMode && this.props.correct === -2 && <Typography variant="h1">Nobody got it right!</Typography>}
-          {this.props.end && winner !== '' && <Typography variant="h1">Congratulations to {winner}!</Typography>}
+        <div className={classes.correct}>
+          {this.props.end && winner !== '' && <Typography variant="h4">Congratulations to {winner}!</Typography>}
         </div>
         <div className={classes.contestants}>
         {contestants.map((contestant) => {
@@ -61,9 +64,7 @@ class Contestants extends Component {
             adminMode={this.props.adminMode}
             key={contestant[1]._id}
             contestant={contestant[1]}
-            updateValue={(key, value) => {
-              this.props.updateValue(contestant[1]._id, key, value);
-            }}
+            updateValue={(key, value) => this.props.updateValue(contestant[1]._id, key, value)}
             className={classes.contestant}
           />
         })}

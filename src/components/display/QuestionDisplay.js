@@ -10,6 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import CheckBoxEmpty from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxChecked from '@material-ui/icons/CheckBox';
 import {withStyles} from '@material-ui/core/styles';
+import classnames from 'classnames';
+import red from '@material-ui/core/colors/red';
+import green from '@material-ui/core/colors/green';
 
 import Media from './Media';
 
@@ -18,12 +21,22 @@ const styles = {
     maxWidth: '60%',
     margin: '10px auto'
   },
+  resultDisplay: {
+    textAlign: 'center',
+    padding: 0
+  },
+  correct: {
+    backgroundColor: green[100]
+  },
+  incorrect: {
+    backgroundColor: red[100]
+  }
 };
 
 class QuestionDisplay extends Component {
   renderChoices()
   {
-    const {question, correct} = this.props;
+    const {question, displayAnswer} = this.props;
 
     if (!question.choices) {
       return;
@@ -33,10 +46,10 @@ class QuestionDisplay extends Component {
       <CardContent>
         <List>
           {question.choices.map((choice) => {
-            return (<ListItem selected={correct && choice === question.answer}>
+            return (<ListItem selected={displayAnswer && choice === question.answer}>
               <ListItemIcon>
-                {correct && choice === question.answer && <CheckBoxChecked />}
-                {(!correct || choice !== question.answer) && <CheckBoxEmpty/>}
+                {displayAnswer && choice === question.answer && <CheckBoxChecked />}
+                {(!displayAnswer || choice !== question.answer) && <CheckBoxEmpty/>}
               </ListItemIcon>
               <ListItemText primary={<Typography variant="h5">{choice}</Typography>} />
             </ListItem>)
@@ -48,8 +61,9 @@ class QuestionDisplay extends Component {
 
   render()
   {
-    const {classes, correct, roundNumber, roundName, questionNumber, question} = this.props;
+    const {classes, correct, roundNumber, roundName, questionNumber, question, displayAnswer} = this.props;
     let cardContent;
+    let extraClass;
 
     if (roundNumber === undefined || roundNumber === 0) {
       cardContent = (
@@ -71,16 +85,25 @@ class QuestionDisplay extends Component {
           title={question.question}
           subheader={`Round ${roundNumber} - ${roundName} (Question ${questionNumber})`}
         />
+        <CardContent className={classes.resultDisplay}>
+          {correct === -2 && <Typography variant="subtitle1">Nobody got that one!</Typography>}
+        </CardContent>
         <Media media={question.media}/>
-        {correct && !question.choices && <CardContent>
+        {displayAnswer && !question.choices && <CardContent>
           <Typography variant="h5">The correct answer was: <strong>{this.props.question.answer}</strong></Typography>
         </CardContent>}
         {this.renderChoices()}
       </>;
+
+      if (!(correct <= 0)) {
+        extraClass = classes.correct;
+      } else if (correct !== 0) {
+        extraClass = classes.incorrect;
+      }
     }
 
     return (
-      <Card raised className={classes.card}>
+      <Card raised className={classnames(classes.card, extraClass)}>
         {cardContent}
       </Card>
     );

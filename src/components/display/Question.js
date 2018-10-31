@@ -8,7 +8,8 @@ const mapStateToProps = (state) =>
     roundName: state.question.roundName,
     questionNumber: state.question.questionNumber,
     question: state.question.question,
-    correct: state.contestants.correct !== 0 && state.contestants.correct !== -1,
+    displayAnswer: state.contestants.correct !== 0 && state.contestants.correct !== -1,
+    correct: state.contestants.correct
   }
 }
 

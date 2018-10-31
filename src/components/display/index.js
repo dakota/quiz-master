@@ -13,8 +13,9 @@ const styles = {
   grow: {
     flexGrow: 1
   },
-  header: {
-    display: 'flex'
+  flexer: {
+    display: 'flex',
+    alignItems: 'flex-start'
   }
 };
 
@@ -29,14 +30,11 @@ class Display extends Component {
     const {classes} = this.props;
 
     return (
-      <div className="full-height">
-        <header className={classes.header}>
-          <Typography variant="h2" className={classes.grow}>
-            Quiz Master 3000
-          </Typography>
+      <div>
+        <div className={classes.flexer}>
+          <Question />
           <ConnectionStatus/>
-        </header>
-        <Question />
+        </div>
         <Contestants />
       </div>
     )
