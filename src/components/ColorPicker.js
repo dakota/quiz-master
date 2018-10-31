@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import {COLORS} from '../constants';
 
 class ColorPicker extends Component {
@@ -23,12 +25,11 @@ class ColorPicker extends Component {
   render()
   {
     return (
-      <RadioGroup container="div" childContainer="div" name="colorOption" value={this.state.value} onChange={this.onChange}>
-        {COLORS.map(color =>
-        {
-          return <Radio key={color} value={color} ripple>{color}</Radio>;
-        })}
-      </RadioGroup>
+      <FormControl component="fieldset">
+        <RadioGroup container="div" childContainer="div" name="colorOption" value={this.state.value} onChange={this.onChange}>
+          {COLORS.map(color => <FormControlLabel value={color} control={<Radio/>} label={color} key={color} />)}
+        </RadioGroup>
+      </FormControl>
     )
   }
 }

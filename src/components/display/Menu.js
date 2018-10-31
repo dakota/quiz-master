@@ -14,11 +14,22 @@ class Contestants extends Component {
   constructor(props)
   {
     super(props);
-    this.state = {};
+    this.state = {
+      anchorEl: null
+    };
     this.handleOpenDialog = this.handleOpenDialog.bind(this);
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
     this.updateColor = this.updateColor.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
+
+  handleClick = event => {
+    this.setState({anchorEl: event.currentTarget});
+  };
+
+  handleClose = () => {
+    this.setState({anchorEl: null});
+  };
 
   handleOpenDialog(dialogTitle, dialogContent, dialogAccept)
   {
@@ -47,6 +58,7 @@ class Contestants extends Component {
   render()
   {
     const contestant = this.props.contestant;
+    const {anchorEl} = this.state;
 
     const colorPicker = (<ColorPicker ref='colorPicker' value={contestant.color}/>);
 
@@ -59,7 +71,12 @@ class Contestants extends Component {
         >
           <MoreVertIcon/>
         </IconButton>
-        <Menu align="right">
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClose}
+          align="right"
+        >
           <MenuItem onClick={() => this.handleOpenDialog('Change color?', colorPicker, this.updateColor)}>Change color</MenuItem>
           <MenuItem onClick={() => this.handleOpenDialog('New score:')}>Change score</MenuItem>
           <MenuItem onClick={() => this.props.buzzer(contestant._id)}>Trigger buzzer</MenuItem>

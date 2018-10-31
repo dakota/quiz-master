@@ -61,6 +61,6 @@ export const actions = {
 }
 
 export const COLORS = [
-  'red', 'green', 'blue', 'indigo', 'pink', 'purple', 'deep-purple', 'light-blue', 'cyan', 'teal', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange',
-  'brown', 'grey', 'blue-grey'
+  'red', 'green', 'blue', 'indigo', 'pink', 'purple', 'deepPurple', 'lightBlue', 'cyan', 'teal', 'lightGreen', 'lime', 'yellow', 'amber', 'orange', 'deepOrange',
+  'brown', 'grey', 'blueGrey'
 ];
