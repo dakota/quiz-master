@@ -6,11 +6,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import {withStyles} from '@material-ui/core/styles';
 
-import {buzz, clearBuzzers, configure, correctAnswer, incorrectAnswer, nextQuestion} from '../../actions';
+import {clearBuzzers, configure, correctAnswer, incorrectAnswer, nextQuestion} from '../../actions';
 import {CLASS_HOST} from '../../constants';
 import Contestants from '../display/Contestants';
 import Question from './Question';
-import throttle from 'lodash.throttle';
 
 const styles = {
   wrapper: {

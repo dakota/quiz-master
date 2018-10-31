@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
-import classnames from 'classnames';
 import * as colors from '@material-ui/core/colors';
 import CardHeader from '@material-ui/core/CardHeader';
 import Menu from './Menu';
