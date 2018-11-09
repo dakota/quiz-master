@@ -8,7 +8,8 @@ const styles = {
   },
   imageMedia: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    backgroundSize: 'contain',
+    paddingTop: '25%', // 16:9
   },
 };
 

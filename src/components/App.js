@@ -11,6 +11,7 @@ const history = createBrowserHistory();
 
 const styles = {
   root: {
+    height: '100%',
     width: '100%',
     margin: 'auto'
   }

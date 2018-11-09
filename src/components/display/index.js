@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles';
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 
 import {configure} from '../../actions';
 import {CLASS_DISPLAY} from '../../constants';
@@ -9,16 +10,28 @@ import Question from './Question';
 import ConnectionStatus from '../ConnectionStatus';
 
 const styles = {
-  grow: {
-    flexGrow: 1
+  wrapper: {
+    position: 'relative',
   },
-  flexer: {
-    display: 'flex',
-    alignItems: 'flex-start'
+  connectionWrapper: {
+    position: 'absolute',
+    top: 0,
+    right: 0
   }
 };
 
-class Display extends Component {
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+    fontSize: 5,
+    htmlFontSize: 10,
+  },
+  spacing: {
+    unit: 5
+  }
+});
+
+class Display extends PureComponent {
   componentWillMount()
   {
     this.props.dispatch(configure(CLASS_DISPLAY));
@@ -29,26 +42,19 @@ class Display extends Component {
     const {classes} = this.props;
 
     return (
-      <div>
-        <div className={classes.flexer}>
+      <MuiThemeProvider theme={theme}>
+        <div className={classes.wrapper}>
+          <div className={classes.connectionWrapper}>
+            <ConnectionStatus/>
+          </div>
           <Question />
-          <ConnectionStatus/>
+          <Contestants />
         </div>
-        <Contestants />
-      </div>
+      </MuiThemeProvider>
     )
   }
 }
 
-Display = connect(
-  (state) => {
-    return {
-      end: state.question.end,
-      roundNumber: state.question.roundNumber,
-      roundName: state.question.roundName,
-      questionNumber: state.question.questionNumber,
-    }
-  }
-)(Display);
+Display = connect()(Display);
 
 export default withStyles(styles)(Display);

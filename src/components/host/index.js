@@ -29,7 +29,7 @@ class Host extends Component {
 
   render()
   {
-    const {classes, roundNumber, onCorrect, end, onIncorrect, onClear, onNext, questionNumber, question, contestantCount, buzzed, correct} = this.props;
+    const {classes, roundNumber, onCorrect, end, onIncorrect, onClear, onNext, questionNumber, question, contestantCount, buzzed, correct, timer} = this.props;
 
     return (
       <div>
@@ -57,6 +57,7 @@ class Host extends Component {
             disabled={contestantCount === 0}
             buzzed={buzzed}
             correct={correct}
+            timer={timer}
           />}
           {roundNumber !== 0 && end && <Button variant="contained" onClick={onNext}>Restart the quiz</Button>}
           <Contestants adminMode/>
@@ -83,6 +84,7 @@ Host = connect((store) => {
     questionNumber: store.question.questionNumber,
     contestantCount: Object.entries(store.contestants.contestants).length,
     question: store.question.question,
+    timer: store.timer
   }
 }, mapDispatchToProps)(Host);
 

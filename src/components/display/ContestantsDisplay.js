@@ -5,21 +5,33 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
   displayWrapper: {
-    height: 'auto',
-    position: 'absolute',
-    bottom: 10,
-    left: 10,
-    right: 10,
+    width: '10%',
+    position: 'fixed',
+    top: 5,
+    left: 5,
+    bottom: 0,
+    '& $contestants': {
+      flexDirection: 'column',
+      height: '100%'
+    },
+    '& $contestant': {
+      marginBottom: 15
+    }
   },
   adminWrapper: {
-
+    '& $contestants': {
+      flexDirection: 'row',
+    },
+    '& $contestant': {
+      marginRight: 15
+    }
   },
   contestants: {
     display: 'flex',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
   },
   contestant: {
-    marginRight: 20
+    flex: '1 1 0',
   },
   correct: {
     position: 'absolute',

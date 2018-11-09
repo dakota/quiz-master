@@ -2,6 +2,9 @@
   - name: Systems check
     questions:
       - question: If John has R30 and Jim has a duck, when traveling to Johannesburg at 60km/h, how long does it take Sarah to eat a cheese burger?
+        media:
+            type: image
+            file: mongolia-flag.jpg
         choices:
           - Exactly 17.8 microfarads
           - Blue, because albatrosses are the largest flying birds.

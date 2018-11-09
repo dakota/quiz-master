@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import Media from './Media';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
@@ -18,10 +18,10 @@ const styles = {
   }
 };
 
-class Question extends PureComponent {
+class Question extends Component {
   render()
   {
-    const {classes, roundNumber, questionNumber, question, onCorrect, onIncorrect, onNext, buzzed, disabled, correct} = this.props;
+    const {classes, roundNumber, questionNumber, question, onCorrect, onIncorrect, onNext, buzzed, disabled, correct, timer} = this.props;
 
     if (roundNumber === undefined) {
       return null;
@@ -64,6 +64,7 @@ class Question extends PureComponent {
                   className={classes.nextButton}
           >
             {questionNumber === 0 ? 'Start round' : 'Next question'}
+            {timer ? ` - ${timer}` : ''}
           </Button>
         </CardActions>}
       </Card>

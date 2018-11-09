@@ -49,7 +49,7 @@ class BuzzerButtonDisplay extends PureComponent {
         <Button variant="fab"
                 color="primary"
                 onClick={this.props.buzz}
-                disabled={this.props.buzzer !== buzzer.READY || this.props.active === false}
+                disabled={this.props.buzzer !== buzzer.READY || this.props.active === false || this.props.timer !== 0}
                 className={classes.button}
         >
           {this.props.timer === 0 && <AlarmIcon fontSize="large"/>}

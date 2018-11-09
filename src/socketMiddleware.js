@@ -47,7 +47,7 @@ const socketMiddleware = (function ()
     store.dispatch(disconnected());
 
     retryCount++;
-    store.dispatch(retryConnection(retryCount * 30))
+    store.dispatch(retryConnection(retryCount * 5))
   }
 
   const onMessage = (ws, store) => evt =>

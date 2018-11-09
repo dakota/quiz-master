@@ -6,6 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import CheckBoxEmpty from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxChecked from '@material-ui/icons/CheckBox';
@@ -18,7 +19,7 @@ import Media from './Media';
 
 const styles = {
   card: {
-    maxWidth: '60%',
+    width: '75%',
     margin: '10px auto'
   },
   resultDisplay: {
@@ -30,27 +31,33 @@ const styles = {
   },
   incorrect: {
     backgroundColor: red[100]
+  },
+  choices: {
+    padding: 0
+  },
+  listItem: {
+    paddingBottom: 3,
+    paddingTop: 3,
   }
 };
 
 class QuestionDisplay extends Component {
   renderChoices()
   {
-    const {question, displayAnswer} = this.props;
+    const {question, displayAnswer, classes} = this.props;
 
     if (!question.choices) {
       return;
     }
 
     return (
-      <CardContent>
+      <CardContent className={classes.choices}>
         <List>
           {question.choices.map((choice) => {
-            return (<ListItem selected={displayAnswer && choice === question.answer}>
-              <ListItemIcon>
-                {displayAnswer && choice === question.answer && <CheckBoxChecked />}
-                {(!displayAnswer || choice !== question.answer) && <CheckBoxEmpty/>}
-              </ListItemIcon>
+            const itemIcon = displayAnswer && choice === question.answer ? <CheckBoxChecked/> : <CheckBoxEmpty/>;
+
+            return (<ListItem selected={displayAnswer && choice === question.answer} className={classes.listItem} key={choice}>
+              <ListItemIcon>{itemIcon}</ListItemIcon>
               <ListItemText primary={<Typography variant="h5">{choice}</Typography>} />
             </ListItem>)
           })}
@@ -61,7 +68,7 @@ class QuestionDisplay extends Component {
 
   render()
   {
-    const {classes, correct, roundNumber, roundName, questionNumber, question, displayAnswer} = this.props;
+    const {classes, correct, roundNumber, roundName, questionNumber, question, displayAnswer, timer} = this.props;
     let cardContent;
     let extraClass;
 
@@ -93,6 +100,11 @@ class QuestionDisplay extends Component {
           <Typography variant="h5">The correct answer was: <strong>{this.props.question.answer}</strong></Typography>
         </CardContent>}
         {this.renderChoices()}
+        {timer > 0 && <CardActions>
+          <Typography variant="h4">
+            {timer}
+          </Typography>
+        </CardActions>}
       </>;
 
       if (!(correct <= 0)) {

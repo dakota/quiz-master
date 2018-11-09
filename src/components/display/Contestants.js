@@ -7,7 +7,6 @@ const mapStateToProps = (state) =>
   return {
     end: state.question.end,
     contestants: state.contestants.contestants,
-    buzzed: state.contestants.buzzed,
     correct: state.contestants.correct
   }
 }

@@ -125,6 +125,7 @@ function contestants(state = initialState, action)
 
       if (action.correct) {
         newState.buzzed = false;
+        newState.buzzee = null;
         newState.incorrects = [];
         newState.contestants[buzzee].score += 1;
         newState.correct = buzzee;

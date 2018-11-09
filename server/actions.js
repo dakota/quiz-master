@@ -15,10 +15,11 @@ export const CLEAR_BUZZER = 'ACTION_CLEAR_BUZZER';
 export const ANSWER = 'ACTION_ANSWER';
 export const DISPLAY_UPDATED = 'ACTION_DISPLAY_UPDATED';
 export const NEXT_QUESTION = 'ACTION_NEXT_QUESTION';
-export const ENABLE_QUESTION = 'ACTION_ENABLE_QUESTION';
 export const TIMER_STARTED = 'ACTION_TIMER_STARTED';
 export const TIMER_STOPPED = 'ACTION_TIMER_STOPPED';
 export const TIMER_TICK = 'ACTION_TIMER_TICK';
+
+let timerReference;
 
 export function connectionHandshake(webSocketConnection, handshake) {
   return {type: connection.HANDSHAKE, handshake, connection: webSocketConnection}
@@ -36,7 +37,13 @@ export function startServer()
 
 export function buzz(_id)
 {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const state = getState();
+
+    if (state.contestants.buzzee !== null) {
+      return;
+    }
+
     dispatch({type: BUZZ, _id});
     dispatch(doTimer(30));
   }
@@ -49,17 +56,29 @@ export function updateContestantField(_id, field, value)
 
 export function clearBuzzer()
 {
-  return {type: CLEAR_BUZZER}
+  clearTimeout(timerReference);
+
+  return (dispatch) => {
+    dispatch({type: CLEAR_BUZZER});
+    dispatch({type: TIMER_TICK, timeRemaining: 0});
+  }
+
 }
 
 export function answer(correct)
 {
-    return {type: ANSWER, correct}
+  clearTimeout(timerReference);
+
+  return (dispatch) => {
+    dispatch({type: ANSWER, correct});
+    dispatch({type: TIMER_TICK, timeRemaining: 0});
+  }
 }
 
 export function doTimer(timer)
 {
   let timeRemaining = timer;
+  clearTimeout(timerReference);
 
   return (dispatch, getState) => {
     dispatch({type: TIMER_TICK, timeRemaining});
@@ -75,7 +94,7 @@ export function doTimer(timer)
       return;
     }
 
-    setTimeout(() => {
+    timerReference = setTimeout(() => {
       timeRemaining--;
       dispatch(doTimer(timeRemaining));
     }, 1000);
@@ -90,6 +109,7 @@ export function nextQuestion()
     const state = getState();
 
     if (state.quiz.current.question !== 0) {
+      clearTimeout(timerReference);
       dispatch(doTimer(15));
     }
   };
