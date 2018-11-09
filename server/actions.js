@@ -15,6 +15,10 @@ export const CLEAR_BUZZER = 'ACTION_CLEAR_BUZZER';
 export const ANSWER = 'ACTION_ANSWER';
 export const DISPLAY_UPDATED = 'ACTION_DISPLAY_UPDATED';
 export const NEXT_QUESTION = 'ACTION_NEXT_QUESTION';
+export const ENABLE_QUESTION = 'ACTION_ENABLE_QUESTION';
+export const TIMER_STARTED = 'ACTION_TIMER_STARTED';
+export const TIMER_STOPPED = 'ACTION_TIMER_STOPPED';
+export const TIMER_TICK = 'ACTION_TIMER_TICK';
 
 export function connectionHandshake(webSocketConnection, handshake) {
   return {type: connection.HANDSHAKE, handshake, connection: webSocketConnection}
@@ -32,7 +36,10 @@ export function startServer()
 
 export function buzz(_id)
 {
-  return {type: BUZZ, _id};
+  return (dispatch) => {
+    dispatch({type: BUZZ, _id});
+    dispatch(doTimer(30));
+  }
 }
 
 export function updateContestantField(_id, field, value)
@@ -50,7 +57,40 @@ export function answer(correct)
     return {type: ANSWER, correct}
 }
 
+export function doTimer(timer)
+{
+  let timeRemaining = timer;
+
+  return (dispatch, getState) => {
+    setTimeout(() => {
+      dispatch({type: TIMER_TICK, timeRemaining});
+      timeRemaining--;
+
+      if (timeRemaining <= 0) {
+        const state = getState();
+        if (state.contestants.buzzed) {
+          dispatch(answer(false));
+        } else {
+          dispatch(clearBuzzer());
+        }
+
+        return;
+      }
+
+      dispatch(doTimer(timeRemaining));
+    }, 1000);
+  }
+}
+
 export function nextQuestion()
 {
-  return {type: NEXT_QUESTION};
+  return (dispatch, getState) => {
+    dispatch({type: NEXT_QUESTION});
+
+    const state = getState();
+
+    if (state.quiz.current.question !== 0) {
+      dispatch(doTimer(15));
+    }
+  };
 }

@@ -1,4 +1,7 @@
-import {connection, BUZZ, REMOVE_CONTESTANT, CHANGE_CONTESTANT_FIELD, CLEAR_BUZZER, ANSWER, NEXT_QUESTION} from '../actions';
+import {
+  connection, BUZZ, REMOVE_CONTESTANT, CHANGE_CONTESTANT_FIELD, CLEAR_BUZZER, ANSWER, NEXT_QUESTION,
+  TIMER_STOPPED, clearBuzzer
+} from '../actions';
 import {CLASS_CONTESTANT, buzzer, COLORS} from '../constants';
 
 const initialState = {
@@ -155,7 +158,7 @@ function contestants(state = initialState, action)
       newState.buzzed = false;
       newState.buzzee = null;
       for (let _id in newState.contestants) {
-        resetBuzzer(newState, _id);
+        freezeBuzzer(newState, _id);
       }
 
       return newState;

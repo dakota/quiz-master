@@ -1,4 +1,4 @@
-import {NEXT_QUESTION, DISPLAY_UPDATED} from '../actions';
+import {NEXT_QUESTION, DISPLAY_UPDATED, TIMER_STARTED, TIMER_STOPPED, TIMER_TICK} from '../actions';
 import YAML from 'yamljs';
 
 const shuffle = (array) =>
@@ -40,6 +40,7 @@ const loadQuiz = () => {
   return {
     changed: false,
     end: false,
+    timer: 0,
     current: {
       round: 0,
       question: 0
@@ -54,7 +55,11 @@ function quiz(state = loadQuiz(), action)
   switch (action.type) {
     case DISPLAY_UPDATED:
       return Object.assign({}, state, {changed: false});
-    case NEXT_QUESTION: {
+    case TIMER_STOPPED:
+      return Object.assign({}, state, {timer: 0});
+    case TIMER_TICK:
+      return Object.assign({}, state, {timer: action.timeRemaining});
+    case NEXT_QUESTION:
       const newState = Object.assign({}, state);
 
       newState.changed = true;
@@ -76,8 +81,6 @@ function quiz(state = loadQuiz(), action)
       }
 
       return newState;
-    }
-
     default:
       return state;
   }

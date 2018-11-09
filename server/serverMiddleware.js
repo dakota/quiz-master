@@ -17,7 +17,8 @@ import {
   ANSWER,
   DISPLAY_UPDATED,
   nextQuestion,
-  NEXT_QUESTION
+  NEXT_QUESTION,
+  TIMER_TICK
 } from './actions';
 import {
   msg,
@@ -152,6 +153,7 @@ const serverMiddleware = (function ()
     sendMessage(connection, msg.UPDATE_CONTESTANTS, {
       contestants: state.contestants.contestants,
       buzzed: state.contestants.buzzed,
+      timer: state.quiz.timer,
       correct: state.contestants.correct
     }, _id);
 
@@ -161,7 +163,7 @@ const serverMiddleware = (function ()
         roundNumber: state.quiz.current.round,
         name: !state.quiz.end && state.quiz.current.round !== 0 ? state.quiz.questions[state.quiz.current.round - 1].name : '',
         questionNumber: state.quiz.current.question,
-        question: state.quiz.end || state.quiz.current.round === 0 || state.quiz.current.question === 0 ? null : state.quiz.questions[state.quiz.current.round - 1].questions[state.quiz.current.question - 1]
+        question: state.quiz.end || state.quiz.current.round === 0 || state.quiz.current.question === 0 ? null : state.quiz.questions[state.quiz.current.round - 1].questions[state.quiz.current.question - 1],
       }, _id);
     }
   }
@@ -186,6 +188,7 @@ const serverMiddleware = (function ()
     sendMessage(state.connections[_id], msg.UPDATE_CONTESTANT, {
       contestant: state.contestants.contestants[_id],
       active: state.quiz.end === false && state.quiz.current.round !== 0 && state.quiz.current.question !== 0,
+      timer: state.quiz.timer
     }, _id);
   }
 
@@ -249,6 +252,7 @@ const serverMiddleware = (function ()
       case CLEAR_BUZZER:
       case ANSWER:
       case NEXT_QUESTION:
+      case TIMER_TICK:
         result = next(action);
 
         state = store.getState();
