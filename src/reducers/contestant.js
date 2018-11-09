@@ -5,6 +5,7 @@ const initialState = {
   color: '',
   score: 0,
   name: '',
+  timer: 0,
 };
 
 function contestant(state = initialState, action)

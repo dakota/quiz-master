@@ -82,14 +82,14 @@ export function configured()
   return {type: actions.CONFIGURED}
 }
 
-export function updateContestants(contestants, buzzed, correct)
+export function updateContestants(contestants, buzzed, correct, timer)
 {
-  return {type: actions.UPDATE_CONTESTANTS, contestants, buzzed, correct}
+  return {type: actions.UPDATE_CONTESTANTS, contestants, buzzed, correct, timer}
 }
 
-export function updateContestant(_id, contestant, active, store = true)
+export function updateContestant(_id, contestant, active, timer)
 {
-  return {type: actions.UPDATE_CONTESTANT, _id, contestant, active, store}
+  return {type: actions.UPDATE_CONTESTANT, _id, contestant, active, timer}
 }
 
 export function updateContestantField(_id, field, value, store = true)

@@ -66,13 +66,13 @@ const socketMiddleware = (function ()
         if (state.class === CLASS_CONTESTANT) {
           break;
         }
-        store.dispatch(updateContestants(command.contestants, command.buzzed, command.correct));
+        store.dispatch(updateContestants(command.contestants, command.buzzed, command.correct, command.timer));
         break;
       case msg.UPDATE_CONTESTANT:
         if (state.class !== CLASS_CONTESTANT) {
           break;
         }
-        store.dispatch(updateContestant(command._id, command.contestant, command.active, false));
+        store.dispatch(updateContestant(command._id, command.contestant, command.active, command.timer));
         break;
       case msg.QUESTION: {
         store.dispatch(setQuestion(command.name, command.roundNumber, command.questionNumber, command.question, command.end));

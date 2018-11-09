@@ -8,7 +8,8 @@ const mapStateToProps = (state) =>
 {
   return {
     buzzer: state.contestant.buzzer,
-    active: state.active
+    active: state.active,
+    timer: state.timer
   }
 };
 

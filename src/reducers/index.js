@@ -7,6 +7,7 @@ import configured from './configured';
 import id from './id';
 import question from './question';
 import active from './active';
+import timer from './timer';
 
 const quizMasterApp = combineReducers({
   connection,
@@ -16,7 +17,8 @@ const quizMasterApp = combineReducers({
   id,
   configured,
   question,
-  active
+  active,
+  timer
 });
 
 export default quizMasterApp;

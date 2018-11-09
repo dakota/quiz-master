@@ -62,21 +62,21 @@ export function doTimer(timer)
   let timeRemaining = timer;
 
   return (dispatch, getState) => {
-    setTimeout(() => {
-      dispatch({type: TIMER_TICK, timeRemaining});
-      timeRemaining--;
+    dispatch({type: TIMER_TICK, timeRemaining});
 
-      if (timeRemaining <= 0) {
-        const state = getState();
-        if (state.contestants.buzzed) {
-          dispatch(answer(false));
-        } else {
-          dispatch(clearBuzzer());
-        }
-
-        return;
+    if (timeRemaining <= 0) {
+      const state = getState();
+      if (state.contestants.buzzed) {
+        dispatch(answer(false));
+      } else {
+        dispatch(clearBuzzer());
       }
 
+      return;
+    }
+
+    setTimeout(() => {
+      timeRemaining--;
       dispatch(doTimer(timeRemaining));
     }, 1000);
   }

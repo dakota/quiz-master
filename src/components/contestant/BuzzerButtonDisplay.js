@@ -16,6 +16,9 @@ const styles = {
   button: {
     width: '80vw',
     height: '80vw',
+    maxWidth: '200px',
+    maxHeight: '200px',
+    fontSize: '2rem'
   }
 };
 
@@ -49,7 +52,8 @@ class BuzzerButtonDisplay extends PureComponent {
                 disabled={this.props.buzzer !== buzzer.READY || this.props.active === false}
                 className={classes.button}
         >
-          <AlarmIcon fontSize="large"/>
+          {this.props.timer === 0 && <AlarmIcon fontSize="large"/>}
+          {this.props.timer > 0 && <h1>{this.props.timer}</h1>}
         </Button>
         {display}
       </div>

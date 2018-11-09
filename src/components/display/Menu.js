@@ -15,7 +15,8 @@ class Contestants extends Component {
   {
     super(props);
     this.state = {
-      anchorEl: null
+      anchorEl: null,
+      openDialog: false
     };
     this.handleOpenDialog = this.handleOpenDialog.bind(this);
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
