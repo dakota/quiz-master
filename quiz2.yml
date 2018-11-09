@@ -1,0 +1,157 @@
+---
+  - name: Systems check
+    questions:
+      - question: If John has R30 and Jim has a duck, when traveling to Johannesburg at 60km/h, how long does it take Sarah to eat a cheese burger?
+        media:
+            type: image
+            file: mongolia-flag.jpg
+        choices:
+          - Exactly 17.8 microfarads
+          - Blue, because albatrosses are the largest flying birds.
+          - No no yellow because ostriches can fly they are just lazy
+          - 5 minutes
+        answer: 5 minutes
+  - name: General Knowledge
+    questions:
+      - question: Which planet is the only one that spins clockwise on its axis?
+        choices: [Jupiter, Earth, Venus, Uranus]
+        answer: Venus
+      - question: Which country's flag is this?
+        media:
+          type: image
+          file: mongolia-flag.jpg
+        choices: [Guam, USA, Bhutan, Suriname, Mongolia]
+        answer: Mongolia
+      - question: Name the Capital of Burkino Faso?
+        answer: Ouagadougou
+        choices: [London, Ouagadougou, Wakanda, Gimbojitibin]
+      - question: What is Scotlands national animal?
+        answer: Unicorn
+      - question: Which periodic element is symbolized by Ag?
+        choices: [Silver, Againtium, Allgaitium, Unobtainium]
+        answer: Silver
+      - question: According to scientists, which came first?
+        choices: [Chicken, Egg]
+        answer: Egg
+      - question: Who wrote the poem The Rime of The Ancient Mariner?
+        choices: [Samuel Taylor Coldridge, Mark Twain, Percy Blythe Shelley, William Shakespeare]
+        answer: Samuel Taylor Coldridge
+      - question: Which reggae singing star died 11th May 1981?
+        answer: Bob Marley
+      - question:  Which Apollo 11 astronaut did not set foot on the moon?
+        answer: Michael Collins
+      - question: The flower of what kind of orange is used to flavour Earl Grey tea?
+        answer: Bergamont
+      - question: Which Sci-Fi character's favourite beverage was, "Earl Grey, Hot"?
+        answer: Captain Jean Luc Picard
+      - question: Who was the 3rd man on the moon?
+        choices: [Buzz Aldrin, Charles Pete Conrad Jr, Alan Bean, Michael Collins]
+        answer: Charles Pete Conrad Jr
+      - question: The ghost town Pripyat is found in which country?
+        answer: Ukraine
+      - question: What was the name of the world's first commercial jet airliner?
+        choices: [747, Comet, 717, 707, A380]
+        answer: Comet
+      - question: Maleficent is the main antagonist in which Walt Disney classic?
+        choices: [Maleficent, Sleeping Beauty, Cinderella, Beauty and the Beast]
+        answer: Sleeping Beauty
+      - question: In which country is the largest clock in the world?
+        media:
+          type: video
+          file: largest-clock.mp4
+        choices: [Germany, Saudi Arabia, United Kingdom, United States of America]
+        answer: Germany
+      - question: Who is currently the South African Minister of Finance
+        choices: [Pravin Gordhan, Malusi Gigaba, Des van Rooyen, Tito Mboweni, Nhlanhla Nene]
+        answer: Tito Mboweni
+      - question: Who is currently in the lead for the most times being Minister of Finance?
+        answer: Tied between Pravin Gordhan and Nhlanhla Nene at twice eact
+      - question: A phlebotomist extracts what from the human body?
+        choices: [Blood, Urine, Poop, Phlem]
+        answer: Blood
+      - question: Which English striker scored six goals at the 2018 World Cup Finals?
+        answer: Harry Kane
+      - question: In which author's work might you find the Bolger, Brandybuck and Gamgee families?
+        answer: J. R. R. Tolkien
+      - question: Which mammal has the largest brain by weight, a human or a sperm whale?
+        choices: [Human, Sperm Whale]
+        answer: Sperm Whale
+      - question: Who did Queen Elizabeth II surpass as Britain's longest serving monarch in September 2015?
+        answer: Queen Victoria
+      - question: What is commonly known as the national fruit of India?
+        answer: Mango
+  - name: Pop Music
+    questions:
+      - question: Which English glam rock band are best remembered for their hit single 'Tiger Feet'?
+        answer: Mud
+      - question: Can't Slow Down' and 'Dancing on the Ceiling' are solo albums from which American singer?
+        answer: Lionel Richie
+      - question: In which year did Robson & Jerome have a huge UK hit with 'Unchained Melody' having first sung the song on ITV show 'Soldier Soldier'?
+        choices: [1995, 1997, 1999]
+        answer: 1995
+      - question: Which American R&B group had a 1994 hit with Waterfalls?
+        answer: TLC
+      - question: In which year did The Beatles release 'Hey Jude'?
+        choices: [1963, 1966, 1968]
+        answer: 1968
+      - question: Which mathematical symbol is not the name of an Ed Sheeran album?
+        choices: [Plus, Multiply, Divide, Subtract]
+        answer: Subtract
+      - question: Complete the Mark Ronson song title: Uptown...
+        choices: [Beat, Girl, Funk, Tunes]
+        answer: Funk
+      - question: Which Taylor Swift album is Shake It Off on?
+        choices: [Speak Now, Taylor Swift, Red, 1989]
+        answer: 1989
+      - question: Who sings Call Me Maybe?
+        choices: [Taylor Swift, Carly Rae Jepsen, Lana Del Rey, Rihanna, Karlien van Jaarsveld]
+        answer: Carly Rae Jepsen
+      - question: Who was the smash hit "Titanium" originally written for?
+        choices: [Sia, Katy Perry, Taylor Swift, Rihanna]
+        answer: Katy Perry
+      - question: Who is featured in this leaked version of "Titanium"?
+        answer: Mary J. Blige
+        media:
+          type: video
+          file: titanium.mp4
+  - name: It happened on Halloween
+    questions:
+      - question: The Battle of Britain ended on the 31 October after The United Kingdom prevented a possible German invasion, but in which year?
+        answer: 1940
+      - question: Halloween 1956, The United Kingdom and France began bombing Egypt. Why?
+        answer: To force the reopening of the Suez Canal
+      - question: ‘Hallowmas’ is another name for which festival?
+        answer: All Saint's Day
+      - question: Charles Dickens wrote a short story about a haunted railway junctions – what was it called?
+        answer: The Signal-Man
+      - question: Name the parents from the Addams Family.
+        answer: Morticia and Gomez
+      - question: In which district of London did Jack the Ripper’s attacks take place?
+        answer: Whitechapel
+      - question: Who is this popular figure?
+        media:
+          type: image
+          file: frankenstein.jpg
+        answer: Frankenstein's Monster
+      - question: What was Doctor Frankenstein’s first name?
+        answer: Victor
+      - question: What is a hallow?
+        answer: A saint or holy person
+      - question: What popular 1998 horror movie is this clip from?
+        media:
+          type: video
+          file: ring.mp4
+        answer: The Ring
+      - question: In what year will the next full moon occur during Halloween?
+        choices: [2018, 2019, 2020, 2021]
+        answer: 2020
+      - question: In the correct spelling of the Halloween, where is the apostrophe placed?
+        answer: Between the two e's (Hallowe'en)
+      - question: What were the original jack o’ lanterns made from?
+        answer: Turnips
+      - question: In what country did carving jack o’ lanterns originate?
+        answer: Ireland
+      - question: What was the first feature length werewolf movie?
+        answer: Werewolf of London, released in 1935
+
+
